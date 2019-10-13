@@ -1,4 +1,4 @@
-
+"""Script to run the server."""
 from flask import Flask
 
 app = Flask(__name__)
@@ -6,8 +6,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "hello"
+    return "hello, world"
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=2345)
