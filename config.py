@@ -1,3 +1,4 @@
+"""File that contains the Config object."""
 import os
 
 
