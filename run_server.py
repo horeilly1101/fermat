@@ -1,13 +1,8 @@
 """Script to run the server."""
-from flask import Flask
-
-app = Flask(__name__)
-
-
-@app.route("/")
-def index():
-    return "hello, world"
+from app import create_app
+from config import Config
 
 
 if __name__ == "__main__":
+    app = create_app(Config)
     app.run(port=2345)

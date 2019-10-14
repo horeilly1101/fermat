@@ -17,6 +17,8 @@ Run the server.
 python3 run_server.py
 ```
 
+Open up `localhost:2345` in your browser.
+
 ## How to test
 
 Tests are set up with the `unittest` module. You can run them with
