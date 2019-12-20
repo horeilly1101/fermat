@@ -2,6 +2,7 @@
 import unittest
 from primality_testing import is_prime
 from ld_expression import LDExpression
+from rsa import RSAAlgorithm
 import random
 
 
@@ -33,7 +34,10 @@ class TestLDExpression(unittest.TestCase):
                 if p1 != p2:
                     expr = LDExpression(p1, p2)
                     solution = expr.get_solution_to_gcd()
-                    self.assertEqual(1, expr.evaluate(solution))
+                    self.assertEqual(
+                        1,
+                        expr.evaluate(solution)
+                    )
 
     def test_gcd_composites(self):
         for p1 in PRIMES:
@@ -42,8 +46,27 @@ class TestLDExpression(unittest.TestCase):
                     gcd = random.randint(2, pow(10, 4))
                     expr = LDExpression(p1 * gcd, p2 * gcd)
                     solution = expr.get_solution_to_gcd()
-                    self.assertEqual(gcd, expr.evaluate(solution))
+                    self.assertEqual(
+                        gcd,
+                        expr.evaluate(solution)
+                    )
 
 
 class TestRSAAlgorithm(unittest.TestCase):
-    def test_
+    def test_modular_inverse(self):
+        for p1 in PRIMES:
+            for p2 in PRIMES:
+                if p1 != p2:
+                    inv = RSAAlgorithm.compute_modular_inverse(p1, p2)
+                    self.assertEqual(
+                        1,
+                        (p1 * inv) % p2
+                    )
+
+    def test_rsa_algorithm(self):
+        for message in PRIMES + NON_PRIMES:
+            rsa = RSAAlgorithm()
+            self.assertEqual(
+                message,
+                rsa.decrypt(rsa.encrypt(message))
+            )

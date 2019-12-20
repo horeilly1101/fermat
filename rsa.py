@@ -6,7 +6,12 @@ from ld_expression import LDExpression
 class RSAAlgorithm:
     @staticmethod
     def compute_modular_inverse(x, modulus):
-        return LDExpression(x, -1 * modulus).get_solution_to_gcd().x
+        return (
+            LDExpression(x, modulus)
+            .get_solution_to_gcd()
+            .get_x_positive()
+            .x
+        )
 
     def __init__(self):
         prime_generator = RandomPrimeGenerator()
@@ -30,7 +35,7 @@ if __name__ == "__main__":
     algo = RSAAlgorithm()
     print(algo.public_key)
     print(algo.private_key)
-    message = 56
+    message = 123456789
     e = algo.encrypt(message)
     print(e)
     print(algo.decrypt(e))

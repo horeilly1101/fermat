@@ -2,8 +2,25 @@ from typing import NamedTuple
 
 
 class LDSolution(NamedTuple):
+    expression: "LDExpression"
     x: int
     y: int
+
+    def shift(self, k):
+        value = self.evaluate()
+        return self.expression.make_solution(
+            self.x + k * (self.expression.b // value),
+            self.y - k * (self.expression.a // value)
+        )
+
+    def get_x_positive(self):
+        if self.x > 0:
+            return self
+
+        return self.shift(1)
+
+    def evaluate(self):
+        return self.expression.evaluate(self)
 
 
 class LDExpression:
@@ -23,6 +40,9 @@ class LDExpression:
     def evaluate(self, solution: LDSolution):
         return self.a * solution.x + self.b * solution.y
 
+    def make_solution(self, x, y):
+        return LDSolution(self, x, y)
+
     def get_solution_to_gcd(self):
         """
         Compute a solution the the LDExpression that evaluates to
@@ -35,15 +55,18 @@ class LDExpression:
         :return: LDSolution
         """
         # set initial conditions
-        prev_solution = LDSolution(1, 0)
-        solution = LDSolution(0, 1)
+        prev_solution = self.make_solution(1, 0)
+        solution = self.make_solution(0, 1)
 
         while self.evaluate(prev_solution) % self.evaluate(solution):
             multiple = self.evaluate(prev_solution) // self.evaluate(solution)
 
             prev_solution, solution = (
                 solution,
-                LDSolution(prev_solution.x - multiple * solution.x, prev_solution.y - multiple * solution.y)
+                self.make_solution(
+                    prev_solution.x - multiple * solution.x,
+                    prev_solution.y - multiple * solution.y
+                )
             )
 
         return solution
