@@ -9,7 +9,7 @@ class RSAAlgorithm:
         return (
             LDExpression(x, modulus)
             .get_solution_to_gcd()
-            .get_x_positive()
+            .make_x_positive()
             .x
         )
 
@@ -29,13 +29,3 @@ class RSAAlgorithm:
 
     def decrypt(self, message):
         return pow(message, self.private_key, self.modulus)
-
-
-if __name__ == "__main__":
-    algo = RSAAlgorithm()
-    print(algo.public_key)
-    print(algo.private_key)
-    message = 123456789
-    e = algo.encrypt(message)
-    print(e)
-    print(algo.decrypt(e))

@@ -13,7 +13,7 @@ class LDSolution(NamedTuple):
             self.y - k * (self.expression.a // value)
         )
 
-    def get_x_positive(self):
+    def make_x_positive(self):
         if self.x > 0:
             return self
 
