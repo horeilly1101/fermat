@@ -1,4 +1,6 @@
 import random
+from random_prime_generator import RandomPrimeGenerator
+from ld_expression import LDExpression
 
 
 # class RSAAlgorithm:
@@ -15,41 +17,34 @@ import random
 #         )
 
 
-class EncryptionDevice:
+class RSAAlgorithm:
+    @staticmethod
+    def compute_modular_inverse(x, modulus):
+        return LDExpression(x, -1 * modulus).get_solution_to_gcd().x
+
+    def __init__(self):
+        prime_generator = RandomPrimeGenerator()
+        p = prime_generator.generate()
+        q = prime_generator.generate()
+
+        self.modulus = p * q
+        self.public_key = prime_generator.generate()
+        self.private_key = RSAAlgorithm.compute_modular_inverse(
+            self.public_key, (p-1) * (q-1)
+        )
+
     def encrypt(self, message):
-        pass
+        return pow(message, self.public_key, self.modulus)
 
-
-class DecryptionDevice:
     def decrypt(self, message):
-        pass
-
-
-
-def encrypt(message, public_key, pq):
-    return pow(message, public_key, pq)
-
-
-def decrypt(encrypted_message, mult_id, pq):
-    return pow(encrypted_message, mult_id, pq)
-
-
-def compute_inverse(p, q):
-    if q == 0:
-        return p
-    if p == 0:
-        return q
-    return compute_inverse(q, p % q)
-
-
-def convert_string_to_int_list(string):
-    ints = []
-
+        return pow(message, self.private_key, self.modulus)
 
 
 if __name__ == "__main__":
-    m = 123
-    e = encrypt(123, 17, 3233)
+    algo = RSAAlgorithm()
+    print(algo.public_key)
+    print(algo.private_key)
+    message = 56
+    e = algo.encrypt(message)
     print(e)
-    print(decrypt(e, 2753, 3233))
-    print(compute_inverse(7, 28))
+    print(algo.decrypt(e))
