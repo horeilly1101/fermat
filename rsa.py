@@ -3,20 +3,6 @@ from random_prime_generator import RandomPrimeGenerator
 from ld_expression import LDExpression
 
 
-# class RSAAlgorithm:
-#     def __init__(self, p, q, k):
-#         self._p = p
-#         self._q = q
-#         self._k = k
-#
-#     def encrypt(self, message):
-#         return pow(
-#             message,
-#             self._k,
-#             self._p * self._q
-#         )
-
-
 class RSAAlgorithm:
     @staticmethod
     def compute_modular_inverse(x, modulus):
