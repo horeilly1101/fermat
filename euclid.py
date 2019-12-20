@@ -24,4 +24,20 @@ class LDExpression:
         return self.a * solution.x + self.b * solution.y
 
     def get_solution_to_gcd(self):
-        pass
+        solution1 = LDSolution(1, 0)
+        solution2 = LDSolution(0, 1)
+
+        while self.compute(solution1) % self.compute(solution2):
+            multiple = self.compute(solution1) // self.compute(solution2)
+
+            solution1, solution2 = (
+                solution2,
+                LDSolution(solution1.x - multiple * solution2.x, solution1.y - multiple * solution2.y)
+            )
+
+        return solution2
+
+
+if __name__ == "__main__":
+    expr = LDExpression(19, 17)
+    print(expr.get_solution_to_gcd())
