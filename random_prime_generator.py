@@ -14,7 +14,7 @@ import random
 
 
 class RandomPrimeGenerator:
-    def __init__(self, max_value=pow(10, 10)):
+    def __init__(self, max_value=pow(2, 500)):
         self._max_value = max_value
 
     def generate(self):

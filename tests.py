@@ -74,7 +74,25 @@ class TestRSAAlgorithm(unittest.TestCase):
                     )
 
     def test_rsa_algorithm(self):
-        for message in PRIMES + NON_PRIMES:
+        messages = [
+            "hi", "password", ". . . #$% !",
+            "0123456789"
+            "0123456789"
+            "0123456789"
+            "0123456789"
+            "0123456789"
+            "0123456789"
+            "0123456789"
+            "0123456789"
+            "0123456789"
+            "0123456789"
+            "0123456789"
+            "0123456789"
+            "0123456789"
+            "0123456789"
+        ]
+
+        for message in messages:
             rsa = RSAAlgorithm()
             self.assertEqual(
                 message,

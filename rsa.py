@@ -1,5 +1,5 @@
 from random_prime_generator import RandomPrimeGenerator
-from ld_expression import LDExpression
+import utils
 
 
 class EncryptionDevice:
@@ -54,20 +54,6 @@ class AsciiSerializer:
 
 
 class RSAAlgorithm(EncryptionDevice):
-    @staticmethod
-    def compute_modular_inverse(a, modulus):
-        """
-        Function to find a's inverse mod the modulus. i.e.
-        compute a positive x such that ax = 1 mod modulus.
-        """
-        return (
-            LDExpression(a, modulus)
-            # solve ax + modulus * y = gcd(a, modulus)
-            .get_solution_to_gcd()
-            .make_x_positive()
-            .x
-        )
-
     def __init__(self):
         prime_generator = RandomPrimeGenerator()
         p = prime_generator.generate()
@@ -75,12 +61,16 @@ class RSAAlgorithm(EncryptionDevice):
 
         self.modulus = p * q
         self.public_key = prime_generator.generate()
-        self.private_key = RSAAlgorithm.compute_modular_inverse(
-            self.public_key, (p-1) * (q-1)
+        self.private_key = utils.compute_modular_inverse(
+            self.public_key,
+            utils.euler_totient(p, q)
         )
 
     def encrypt(self, message):
-        return pow(message, self.public_key, self.modulus)
+        serialized_message = AsciiSerializer.serialize(message)
+        assert self.modulus > serialized_message
+        return pow(serialized_message, self.public_key, self.modulus)
 
     def decrypt(self, message):
-        return pow(message, self.private_key, self.modulus)
+        decrypted_message = pow(message, self.private_key, self.modulus)
+        return AsciiSerializer.deserialize(decrypted_message)
