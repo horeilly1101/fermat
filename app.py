@@ -5,7 +5,7 @@ from flask import Flask, Blueprint
 main_structure = Blueprint(__name__, "main_structure")
 
 
-@main_structure.route("/")
+@main_structure.route("/get-key/")
 def index():
     return "Hello, world!"
 

@@ -2,7 +2,7 @@
 import unittest
 from primality_testing import is_prime
 from ld_expression import LDExpression
-from rsa import RSAAlgorithm
+from rsa import RSAAlgorithm, AsciiSerializer
 import random
 
 
@@ -20,11 +20,15 @@ NON_PRIMES = [
 class TestPrimalityTesting(unittest.TestCase):
     def test_primes(self):
         for prime in PRIMES:
-            self.assertTrue(is_prime(prime))
+            self.assertTrue(
+                is_prime(prime)
+            )
 
     def test_non_primes(self):
         for non_prime in NON_PRIMES:
-            self.assertFalse(is_prime(non_prime))
+            self.assertFalse(
+                is_prime(non_prime)
+            )
 
 
 class TestLDExpression(unittest.TestCase):
@@ -39,7 +43,7 @@ class TestLDExpression(unittest.TestCase):
                     solution = expr.get_solution_to_gcd()
                     self.assertEqual(
                         1,
-                        expr.evaluate(solution)
+                        solution.evaluate()
                     )
 
     def test_gcd_composites(self):
@@ -54,7 +58,7 @@ class TestLDExpression(unittest.TestCase):
                     solution = expr.get_solution_to_gcd()
                     self.assertEqual(
                         gcd,
-                        expr.evaluate(solution)
+                        solution.evaluate()
                     )
 
 
@@ -75,4 +79,17 @@ class TestRSAAlgorithm(unittest.TestCase):
             self.assertEqual(
                 message,
                 rsa.decrypt(rsa.encrypt(message))
+            )
+
+
+class TestTextSerializer(unittest.TestCase):
+    def test_serialize(self):
+        messages = [
+            "hi", "aloha", "yo!", ". . 0"
+        ]
+
+        for message in messages:
+            self.assertEqual(
+                message,
+                AsciiSerializer.deserialize(AsciiSerializer.serialize(message))
             )

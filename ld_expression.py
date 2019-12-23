@@ -2,6 +2,16 @@ from typing import NamedTuple
 
 
 class LDSolution(NamedTuple):
+    """
+    This is a solution to a Linear Diophantine expression of
+    the form
+        ax + by,
+    where x and y are integer variables.
+
+    Note that if ax + by = g for some integer g, then there
+    are infinitely many solutions x,y. You can compute any
+    of the other solutions with a linear shift.
+    """
     expression: "LDExpression"
     x: int
     y: int
@@ -25,17 +35,22 @@ class LDSolution(NamedTuple):
 
 class LDExpression:
     """
-    Class that represents a linear diophantine equation of
+    Class that represents a linear diophantine expression of
     the form
         ax + by,
-    where x and y are integer variables. For uniformity,
-    we maintain the invariant that a >= b.
+    where x and y are integer variables.
 
     LD stands for Linear Diophantine.
     """
     def __init__(self, a: int, b: int):
         self.a = a
         self.b = b
+
+    def __str__(self):
+        return f"{self.a}x + {self.b}y"
+
+    def __repr__(self):
+        return str(self)
 
     def evaluate(self, solution: LDSolution):
         return self.a * solution.x + self.b * solution.y
@@ -58,9 +73,10 @@ class LDExpression:
         prev_solution = self.make_solution(1, 0)
         solution = self.make_solution(0, 1)
 
-        while self.evaluate(prev_solution) % self.evaluate(solution):
-            multiple = self.evaluate(prev_solution) // self.evaluate(solution)
+        while prev_solution.evaluate() % solution.evaluate():
+            multiple = prev_solution.evaluate() // solution.evaluate()
 
+            # update the stored solutions
             prev_solution, solution = (
                 solution,
                 self.make_solution(
@@ -70,8 +86,3 @@ class LDExpression:
             )
 
         return solution
-
-
-if __name__ == "__main__":
-    expr = LDExpression(5, 7)
-    print(expr.get_solution_to_gcd())
