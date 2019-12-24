@@ -4,6 +4,7 @@ from primality_testing import is_prime
 from ld_expression import LDExpression
 from rsa import RSAAlgorithm, AsciiSerializer
 import random
+import utils
 
 
 PRIMES = [
@@ -67,7 +68,7 @@ class TestRSAAlgorithm(unittest.TestCase):
         for p1 in PRIMES:
             for p2 in PRIMES:
                 if p1 != p2:
-                    inv = RSAAlgorithm.compute_modular_inverse(p1, p2)
+                    inv = utils.compute_modular_inverse(p1, p2)
                     self.assertEqual(
                         1,
                         (p1 * inv) % p2

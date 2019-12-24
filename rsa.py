@@ -61,6 +61,9 @@ class RSAAlgorithm(EncryptionDevice):
 
         self.modulus = p * q
         self.public_key = prime_generator.generate()
+
+        # solve for the modular inverse of the public key mod phi(pq),
+        # where phi is the euler totient function
         self.private_key = utils.compute_modular_inverse(
             self.public_key,
             utils.euler_totient(p, q)
