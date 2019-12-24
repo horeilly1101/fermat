@@ -1,4 +1,4 @@
-from ld_expression import LDExpression
+from rsa.ld_expression import LDExpression
 from functools import reduce
 
 

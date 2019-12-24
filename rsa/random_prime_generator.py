@@ -1,4 +1,4 @@
-from primality_testing import is_prime
+from rsa.primality_testing import is_prime
 import random
 
 

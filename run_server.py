@@ -1,6 +1,6 @@
 """Script to run the server."""
-from app import create_app
-from config import Config
+from rsa.app import create_app
+from rsa.config import Config
 
 
 if __name__ == "__main__":

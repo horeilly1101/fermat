@@ -1,11 +1,9 @@
 """Example testing suite."""
 import unittest
-from primality_testing import is_prime
-from ld_expression import LDExpression
-from rsa import RSAAlgorithm, AsciiSerializer
+from rsa.primality_testing import is_prime
+from rsa.ld_expression import LDExpression
+from rsa import RSAAlgorithm, AsciiSerializer, utils
 import random
-import utils
-
 
 PRIMES = [
     2, 3, 5, 7, 11, 13, 17, 23, 31, 101, 137, 151,

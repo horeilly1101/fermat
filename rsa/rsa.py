@@ -1,5 +1,5 @@
-from random_prime_generator import RandomPrimeGenerator
-import utils
+from rsa.random_prime_generator import RandomPrimeGenerator
+from rsa import utils
 
 
 class EncryptionDevice:
@@ -8,17 +8,6 @@ class EncryptionDevice:
 
     def decrypt(self, message):
         pass
-
-
-class CaesarCipher(EncryptionDevice):
-    def __init__(self, shift):
-        self._shift = shift
-
-    def encrypt(self, message):
-        return "".join(char + self._shift for char in message)
-
-    def decrypt(self, message):
-        return "".join(char - self._shift for char in message)
 
 
 class AsciiSerializer:
@@ -51,6 +40,32 @@ class AsciiSerializer:
             remaining_number //= pow(2, 7)
 
         return message
+
+
+class AESAlgorithm(EncryptionDevice):
+    def __init__(self, key):
+        self._key = key
+
+    @staticmethod
+    def convert_message_to_matrix(message):
+        matrices: list = []
+        for i, char in enumerate(message):
+            matrix_num, position = divmod(i, 16)
+
+            if position == 0:
+                matrices.append(
+                    [[32 for _ in range(4)] for _ in range(4)]
+                )
+
+            j, i = divmod(position, 4)
+            matrices[matrix_num][i][j] = ord(char)
+        return matrices
+
+    def encrypt(self, message):
+        pass
+
+    def decrypt(self, message):
+        pass
 
 
 class RSAAlgorithm(EncryptionDevice):
