@@ -1,5 +1,6 @@
 from rsa.random_prime_generator import RandomPrimeGenerator
 from rsa import utils
+from rsa.serializer import AsciiSerializer
 
 
 class EncryptionDevice:
@@ -8,38 +9,6 @@ class EncryptionDevice:
 
     def decrypt(self, message):
         pass
-
-
-class AsciiSerializer:
-    @staticmethod
-    def convert_to_ascii(character):
-        number = ord(character)
-        assert 0 <= number <= 127
-        return number
-
-    @staticmethod
-    def convert_to_character(number):
-        assert 0 <= number <= 127
-        return chr(number)
-
-    @staticmethod
-    def serialize(message):
-        return sum([
-            pow(2, 7 * i) * AsciiSerializer.convert_to_ascii(char)
-            for i, char in enumerate(message)
-        ])
-
-    @staticmethod
-    def deserialize(number):
-        message = ""
-        remaining_number = number
-
-        while remaining_number > 1:
-            remainder = remaining_number % pow(2, 7)
-            message += AsciiSerializer.convert_to_character(remainder)
-            remaining_number //= pow(2, 7)
-
-        return message
 
 
 class AESAlgorithm(EncryptionDevice):

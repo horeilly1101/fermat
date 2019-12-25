@@ -2,7 +2,8 @@
 import unittest
 from rsa.primality_testing import is_prime
 from rsa.ld_expression import LDExpression
-from rsa.rsa import RSAAlgorithm, AsciiSerializer
+from rsa.encryption_device import RSAAlgorithm
+from rsa.serializer import AsciiSerializer
 from rsa import utils
 import random
 

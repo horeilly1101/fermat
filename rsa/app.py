@@ -1,7 +1,7 @@
 """File that contains the create_app factory function."""
 from flask import Flask, Blueprint
 import json
-from rsa.rsa import RSAAlgorithm
+from rsa.encryption_device import RSAAlgorithm
 
 # create main blueprint
 main_structure = Blueprint(__name__, "main_structure")
