@@ -14,7 +14,7 @@ import random
 
 
 class RandomPrimeGenerator:
-    def __init__(self, min_bits=0, max_bits=56):
+    def __init__(self, min_bits=0, max_bits=64):
         self._min_bits = min_bits
         self._max_bits = max_bits
 

@@ -17,14 +17,12 @@ def get_key(min_bits):
     })
 
 
-def create_app(config) -> Flask:
+def create_app() -> Flask:
     """
     Factory for a Flask application.
-    :param config: config object for the app
     :return: Flask app
     """
     app = Flask(__name__)
-    app.config.from_object(config)
 
     # register blueprints
     app.register_blueprint(main_structure)
