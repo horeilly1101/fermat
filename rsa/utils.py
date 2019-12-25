@@ -20,9 +20,9 @@ def compute_modular_inverse(a, modulus):
     return solution.x
 
 
-def euler_totient(*distinct_primes):
+def euler_totient(*distinct_prime_factors):
     return reduce(
         lambda result, prime: result * (prime - 1),
-        distinct_primes,
+        distinct_prime_factors,
         1
     )

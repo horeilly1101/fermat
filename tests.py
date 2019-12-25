@@ -93,9 +93,10 @@ class TestTextSerializer(unittest.TestCase):
         messages = [
             "hi", "aloha", "yo!", ". . 0"
         ]
+        serializer = AsciiSerializer()
 
         for message in messages:
             self.assertEqual(
                 message,
-                AsciiSerializer.deserialize(AsciiSerializer.serialize(message))
+                serializer.deserialize(serializer.serialize(message))
             )

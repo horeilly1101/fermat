@@ -72,11 +72,13 @@ def is_prime(num):
     assert num > 0
     assert isinstance(num, int)
 
-    # handle a couple small cases
+    # handle a few small cases
     if num == 1:
         return False
     if num == 2:
         return True
+    if num % 2 == 0:  # if num is even
+        return False
 
     # perform Rabin-Miller test for composite numbers
     for witness_candidate in range(2, min(num, 102)):  # check up to 100 witnesses

@@ -53,11 +53,13 @@ class RSAAlgorithm(EncryptionDevice):
             utils.euler_totient(p, q)
         )
 
+        self.serializer = AsciiSerializer()
+
     def encrypt(self, message):
-        serialized_message = AsciiSerializer.serialize(message)
+        serialized_message = self.serializer.serialize(message)
         assert self.modulus > serialized_message
         return pow(serialized_message, self.public_key, self.modulus)
 
     def decrypt(self, message):
         decrypted_message = pow(message, self.private_key, self.modulus)
-        return AsciiSerializer.deserialize(decrypted_message)
+        return self.serializer.deserialize(decrypted_message)
