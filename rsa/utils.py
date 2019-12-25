@@ -1,3 +1,8 @@
+"""
+File that contains various utility functions.
+"""
+
+
 from rsa.ld_expression import LDExpression
 from functools import reduce
 
@@ -21,6 +26,15 @@ def compute_modular_inverse(a, modulus):
 
 
 def euler_totient(*distinct_prime_factors):
+    """
+    Function that computes the euler totient function of
+    a number composed of distinct prime factors.
+
+    If
+        n = p_1 * p_2 * ... * p_n,
+    and all prime factors are distinct, then
+        phi(n) = (p_1 - 1)(p_2 - 1) ... (p_n - 1).
+    """
     return reduce(
         lambda result, prime: result * (prime - 1),
         distinct_prime_factors,

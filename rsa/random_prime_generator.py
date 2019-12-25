@@ -1,3 +1,8 @@
+"""
+File that contains the RandomPrimeGenerator.
+"""
+
+
 from rsa.primality_testing import is_prime
 import random
 
@@ -14,6 +19,9 @@ import random
 
 
 class RandomPrimeGenerator:
+    """
+    Class that randomly generates prime numbers.
+    """
     def __init__(self, min_bits=0, max_bits=64):
         self._min_bits = min_bits
         self._max_bits = max_bits

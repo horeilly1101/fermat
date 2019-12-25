@@ -1,3 +1,6 @@
+"""
+File that contains various utility methods for primality testing.
+"""
 
 
 class _EvenFactorization:

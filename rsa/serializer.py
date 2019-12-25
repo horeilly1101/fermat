@@ -1,6 +1,12 @@
+"""
+File that contains serializers to convert between strings and numbers.
+"""
 
 
 class Serializer:
+    """
+    An object that can convert between strings and numbers.
+    """
     def serialize(self, message):
         pass
 
@@ -9,6 +15,9 @@ class Serializer:
 
 
 class AsciiSerializer(Serializer):
+    """
+    A serializer that deals with strings of ASCII characters.
+    """
     @staticmethod
     def convert_to_ascii(character):
         number = ord(character)

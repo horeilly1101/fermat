@@ -1,9 +1,16 @@
+"""
+File that contains the encryption devices.
+"""
 from rsa.random_prime_generator import RandomPrimeGenerator
 from rsa import utils
 from rsa.serializer import AsciiSerializer
 
 
 class EncryptionDevice:
+    """
+    An Encryption device is an object that can encrypt and decrypt
+    a message.
+    """
     def encrypt(self, message):
         pass
 
@@ -12,6 +19,9 @@ class EncryptionDevice:
 
 
 class AESAlgorithm(EncryptionDevice):
+    """
+    Encryption device that uses the Advanced Encryption Standard.
+    """
     def __init__(self, key):
         self._key = key
 
@@ -38,6 +48,9 @@ class AESAlgorithm(EncryptionDevice):
 
 
 class RSAAlgorithm(EncryptionDevice):
+    """
+    Encryption device that uses the RSA algorithm.
+    """
     def __init__(self, min_bits=0, max_bits=64):
         prime_generator = RandomPrimeGenerator(min_bits, max_bits)
         p = prime_generator.generate()
