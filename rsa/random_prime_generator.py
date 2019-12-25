@@ -1,8 +1,6 @@
 """
 File that contains the RandomPrimeGenerator.
 """
-
-
 from rsa.primality_testing import is_prime
 import random
 
