@@ -69,8 +69,8 @@ class AESAlgorithm(EncryptionDevice):
 
 
 class RSAAlgorithm(EncryptionDevice):
-    def __init__(self):
-        prime_generator = RandomPrimeGenerator()
+    def __init__(self, min_bits=0, max_bits=56):
+        prime_generator = RandomPrimeGenerator(min_bits, max_bits)
         p = prime_generator.generate()
         q = prime_generator.generate()
 

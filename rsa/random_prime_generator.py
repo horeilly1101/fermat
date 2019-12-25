@@ -14,16 +14,15 @@ import random
 
 
 class RandomPrimeGenerator:
-    def __init__(self, max_value=pow(2, 500)):
-        self._max_value = max_value
+    def __init__(self, min_bits=0, max_bits=56):
+        self._min_bits = min_bits
+        self._max_bits = max_bits
 
     def generate(self):
-        prime_candidate = random.randint(0, self._max_value)
+        prime_candidate = random.randint(
+            pow(2, self._min_bits),
+            pow(2, self._max_bits)
+        )
         while not is_prime(prime_candidate):
             prime_candidate += 1
         return prime_candidate
-
-
-if __name__ == "__main__":
-    gen = RandomPrimeGenerator()
-    print(gen.generate())

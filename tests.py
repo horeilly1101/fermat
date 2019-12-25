@@ -2,7 +2,8 @@
 import unittest
 from rsa.primality_testing import is_prime
 from rsa.ld_expression import LDExpression
-from rsa import RSAAlgorithm, AsciiSerializer, utils
+from rsa.rsa import RSAAlgorithm, AsciiSerializer
+from rsa import utils
 import random
 
 PRIMES = [
@@ -12,7 +13,8 @@ PRIMES = [
 
 NON_PRIMES = [
     1, 4, 6, 8, 9, 10, 12, 14, 15, 123, 155, 201,
-    961770273, 961832591, 961872727, 961949947
+    961770273, 961832591, 961872727, 961949947,
+    1624
 ]
 
 
