@@ -16,20 +16,20 @@ class LDSolution(NamedTuple):
     x: int
     y: int
 
-    def shift(self, k):
+    def shift(self, k: int) -> "LDSolution":
         value = self.evaluate()
         return self.expression.make_solution(
             self.x + k * (self.expression.b // value),
             self.y - k * (self.expression.a // value)
         )
 
-    def make_x_positive(self):
+    def make_x_positive(self) -> "LDSolution":
         if self.x > 0:
             return self
 
         return self.shift(1)
 
-    def evaluate(self):
+    def evaluate(self) -> int:
         return self.expression.evaluate(self)
 
 
@@ -46,19 +46,19 @@ class LDExpression:
         self.a = a
         self.b = b
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.a}x + {self.b}y"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return str(self)
 
-    def evaluate(self, solution: LDSolution):
+    def evaluate(self, solution: LDSolution) -> int:
         return self.a * solution.x + self.b * solution.y
 
-    def make_solution(self, x, y):
+    def make_solution(self, x: int, y: int) -> LDSolution:
         return LDSolution(self, x, y)
 
-    def get_solution_to_gcd(self):
+    def get_solution_to_gcd(self) -> LDSolution:
         """
         Compute a solution the the LDExpression that evaluates to
         the greatest common divisor of a and b. This is computed

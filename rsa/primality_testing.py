@@ -9,11 +9,11 @@ class _EvenFactorization:
     divided out. It represents an integer n as
         n = self.base * (2 ^ self.two_power).
     """
-    def __init__(self, base, two_power):
+    def __init__(self, base: int, two_power: int):
         self.base = base
         self.two_power = two_power
 
-    def compute_product(self):
+    def compute_product(self) -> int:
         """
         Multiply out the factorization.
         :return: product
@@ -21,7 +21,7 @@ class _EvenFactorization:
         return self.base * pow(2, self.two_power)
 
     @staticmethod
-    def factor(num):
+    def factor(num: int) -> "_EvenFactorization":
         """
         Compute a number's even factorization.
         :param num: input number
@@ -38,7 +38,7 @@ class _EvenFactorization:
         return _EvenFactorization(base, two_power)
 
 
-def _is_witness(possible_prime, witness_candidate):
+def _is_witness(possible_prime: int, witness_candidate: int) -> bool:
     """
     Compute whether or not a number is a Rabin-Miller witness for a
     possible prime. If the number is a Rabin-Miller witness, then the
@@ -65,7 +65,7 @@ def _is_witness(possible_prime, witness_candidate):
     return True
 
 
-def is_prime(num):
+def is_prime(num: int) -> bool:
     """
     Compute whether an input positive integer is prime.
     :param num: positive integer
@@ -73,7 +73,6 @@ def is_prime(num):
     """
     # prime-ness only makes sense for positive integers
     assert num > 0
-    assert isinstance(num, int)
 
     # handle a few small cases
     if num == 1:

@@ -1,13 +1,11 @@
 """
 File that contains various utility functions.
 """
-
-
 from rsa.ld_expression import LDExpression
 from functools import reduce
 
 
-def compute_modular_inverse(a, modulus):
+def compute_modular_inverse(a: int, modulus: int) -> int:
     """
     Function to find a's inverse mod the modulus. i.e.
     compute a positive x such that ax = 1 mod modulus.
@@ -25,7 +23,7 @@ def compute_modular_inverse(a, modulus):
     return solution.x
 
 
-def euler_totient(*distinct_prime_factors):
+def euler_totient(*distinct_prime_factors: int) -> int:
     """
     Function that computes the euler totient function of
     a number composed of distinct prime factors.

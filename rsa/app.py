@@ -7,10 +7,11 @@ from rsa.encryption_device import RSAAlgorithm
 main_structure = Blueprint(__name__, "main_structure")
 
 
-@main_structure.route("/get-key/<min_bits>")
-def get_key(min_bits):
+@main_structure.route("/get-keys/<min_bits>")
+def get_keys(min_bits):
     algo = RSAAlgorithm(int(min_bits), int(min_bits) + 8)
     return json.dumps({
+        "min_bits": int(min_bits),
         "publicKey": hex(algo.public_key),
         "privateKey": hex(algo.private_key),
         "modulus": hex(algo.modulus)

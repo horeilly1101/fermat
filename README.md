@@ -20,6 +20,8 @@ Run the server.
 python3 run_server.py
 ```
 
+The server will then be available at `localhost:2345`.
+
 ## How to test
 
 Tests are set up with the `unittest` module. You can run them with
