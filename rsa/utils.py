@@ -38,3 +38,64 @@ def euler_totient(*distinct_prime_factors: int) -> int:
         distinct_prime_factors,
         1
     )
+
+
+def gcd(a, b):
+    if a == 0:
+        return b
+
+    if b == 0:
+        return a
+
+    return gcd(b, a % b)
+
+
+def lcm(a, b):
+    return a * b // gcd(a, b)
+
+
+class PrimeFactorization:
+    def __init__(self, prime_factors):
+        self.prime_factors = prime_factors
+
+    def compute_product(self):
+        return reduce(
+            lambda result, num: result * pow(num, self.prime_factors[num]),
+            self.prime_factors,
+            1
+        )
+
+
+class EvenFactorization:
+    """
+    Class that represents an integer with the factors of 2
+    divided out. It represents an integer n as
+        n = self.base * (2 ^ self.two_power).
+    """
+    def __init__(self, base: int, two_power: int):
+        self.base = base
+        self.two_power = two_power
+
+    def compute_product(self) -> int:
+        """
+        Multiply out the factorization.
+        :return: product
+        """
+        return self.base * pow(2, self.two_power)
+
+    @staticmethod
+    def factor(num: int) -> "EvenFactorization":
+        """
+        Compute a number's even factorization.
+        :param num: input number
+        :return: even factorization
+        """
+        base = num
+        two_power = 0
+
+        # divide out the greatest power of 2
+        while base % 2 == 0:
+            base //= 2
+            two_power += 1
+
+        return EvenFactorization(base, two_power)

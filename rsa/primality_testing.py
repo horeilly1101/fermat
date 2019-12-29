@@ -1,41 +1,7 @@
 """
 File that contains various utility methods for primality testing.
 """
-
-
-class _EvenFactorization:
-    """
-    Class that represents an integer with the factors of 2
-    divided out. It represents an integer n as
-        n = self.base * (2 ^ self.two_power).
-    """
-    def __init__(self, base: int, two_power: int):
-        self.base = base
-        self.two_power = two_power
-
-    def compute_product(self) -> int:
-        """
-        Multiply out the factorization.
-        :return: product
-        """
-        return self.base * pow(2, self.two_power)
-
-    @staticmethod
-    def factor(num: int) -> "_EvenFactorization":
-        """
-        Compute a number's even factorization.
-        :param num: input number
-        :return: even factorization
-        """
-        base = num
-        two_power = 0
-
-        # divide out the greatest power of 2
-        while base % 2 == 0:
-            base //= 2
-            two_power += 1
-
-        return _EvenFactorization(base, two_power)
+from rsa.utils import EvenFactorization
 
 
 def _is_witness(possible_prime: int, witness_candidate: int) -> bool:
@@ -52,7 +18,7 @@ def _is_witness(possible_prime: int, witness_candidate: int) -> bool:
     # the witness candidate can't be divisible by the possible prime
     assert witness_candidate % possible_prime != 0
 
-    even_factorization = _EvenFactorization.factor(possible_prime - 1)
+    even_factorization = EvenFactorization.factor(possible_prime - 1)
 
     if pow(witness_candidate, even_factorization.base, possible_prime) == 1:
         return False
