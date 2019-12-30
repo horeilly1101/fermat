@@ -1,6 +1,14 @@
 from rsa.utils import EvenFactorization
 
 
+def get_quadratic_non_residue(number):
+    for i in range(2, number):
+        if compute_jacobi_symbol(i, number) == -1:
+            return i
+
+    raise ValueError(f"No quadratic non residues of {number} found!")
+
+
 def compute_jacobi_symbol(x, modulus):
     if x == 0:
         return 0
