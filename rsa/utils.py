@@ -40,7 +40,11 @@ def euler_totient(*distinct_prime_factors: int) -> int:
     )
 
 
-def gcd(a, b):
+def gcd(a: int, b: int) -> int:
+    """
+    Return the greatest common divisor of a and b.
+    """
+    # Compute using Euclid's algorithm
     if a == 0:
         return b
 
@@ -50,7 +54,12 @@ def gcd(a, b):
     return gcd(b, a % b)
 
 
-def lcm(a, b):
+def lcm(a: int, b: int) -> int:
+    """
+    Return the least common multiple of a and b.
+    """
+    # it's not hard to prove that:
+    #   lcm(a, b) * gcd(a, b) = a * b
     return a * b // gcd(a, b)
 
 

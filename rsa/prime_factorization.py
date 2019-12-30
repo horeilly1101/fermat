@@ -29,6 +29,15 @@ class PrimeFactorization:
             1
         )
 
+    def get_exponent(self, prime):
+        if prime in self.prime_factors:
+            return self.prime_factors[prime]
+
+        return 0
+
+    def get_distinct_prime_factors(self):
+        return list(self.prime_factors.keys())
+
     @staticmethod
     def factor(num) -> "PrimeFactorization":
         # create list of prime numbers <= num

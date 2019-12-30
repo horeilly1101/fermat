@@ -2,6 +2,10 @@ from rsa.utils import EvenFactorization
 
 
 def get_quadratic_non_residue(number):
+    """
+    :param number: positive integer greater than 2
+    :return: a quadratic non residue mod number
+    """
     for i in range(2, number):
         if compute_jacobi_symbol(i, number) == -1:
             return i

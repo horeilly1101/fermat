@@ -1,5 +1,6 @@
 from rsa.prime_factorization import PrimeFactorization
 from rsa.quadratic_reciprocity import get_quadratic_non_residue
+from rsa.primality_testing import is_prime
 from functools import reduce
 
 
@@ -48,6 +49,9 @@ class SumOfSquares:
 
     @staticmethod
     def exists(number: int) -> bool:
+        if is_prime(number) and number % 4 == 1:
+            return True
+
         return SumOfSquares.exists_from_prime_factorization(
             PrimeFactorization.factor(number)
         )
@@ -96,7 +100,7 @@ class SumOfSquares:
 
     @staticmethod
     def make_from_prime_factorization(prime_factorization: PrimeFactorization) -> "SumOfSquares":
-        def raise_to_power(prime):
+        def make_from_prime_power(prime):
             exponent = prime_factorization.prime_factors[prime]
 
             if exponent % 2 == 0:
@@ -113,7 +117,7 @@ class SumOfSquares:
             )
 
         return reduce(
-            lambda result, prime: result.combine(raise_to_power(prime)),
+            lambda result, prime: result.combine(make_from_prime_power(prime)),
             prime_factorization.prime_factors,
             SumOfSquares.get_multiplicative_identity()
         )
