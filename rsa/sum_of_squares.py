@@ -7,8 +7,8 @@ class SumOfSquares:
     def __init__(self, a: int, b: int, result: int):
         assert pow(a, 2) + pow(b, 2) == result
 
-        self.a = a
-        self.b = b
+        self.a = abs(a)
+        self.b = abs(b)
         self.result = result
 
     def __str__(self):
@@ -36,7 +36,7 @@ class SumOfSquares:
         )
 
     @staticmethod
-    def get_multiplicative_inverse():
+    def get_multiplicative_identity():
         return SumOfSquares(1, 0, 1)
 
     @staticmethod
@@ -54,8 +54,6 @@ class SumOfSquares:
 
     @staticmethod
     def _make_from_prime(prime: int) -> "SumOfSquares":
-        print(prime)
-
         if prime == 2:
             return SumOfSquares(1, 1, 2)
 
@@ -72,6 +70,8 @@ class SumOfSquares:
         descent_sum_of_squares = SumOfSquares(z, 1, multiple * prime)
 
         while multiple > 1:
+            # find integers u and v such that
+            # u^2 + v^2 = descent_sum_of_squares.a^2 + descent_sum_of_squares.b^2 mod multiple
             u = descent_sum_of_squares.a % multiple
             v = descent_sum_of_squares.b % multiple
 
@@ -96,7 +96,16 @@ class SumOfSquares:
 
     @staticmethod
     def make_from_prime_factorization(prime_factorization: PrimeFactorization) -> "SumOfSquares":
-        def raise_prime_to_power(prime):
+        def raise_to_power(prime):
+            exponent = prime_factorization.prime_factors[prime]
+
+            if exponent % 2 == 0:
+                return SumOfSquares(
+                    pow(prime, exponent // 2),
+                    0,
+                    pow(prime, exponent)
+                )
+
             return (
                 SumOfSquares
                 ._make_from_prime(prime)
@@ -104,9 +113,9 @@ class SumOfSquares:
             )
 
         return reduce(
-            lambda result, prime: result.combine(raise_prime_to_power(prime)),
+            lambda result, prime: result.combine(raise_to_power(prime)),
             prime_factorization.prime_factors,
-            SumOfSquares.get_multiplicative_inverse()
+            SumOfSquares.get_multiplicative_identity()
         )
 
     @staticmethod

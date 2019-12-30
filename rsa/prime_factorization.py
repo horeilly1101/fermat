@@ -52,3 +52,10 @@ class PrimeFactorization:
                 num_remaining //= prime
 
         return PrimeFactorization(prime_factors)
+
+    @staticmethod
+    def of(*primes):
+        counter = collections.Counter()
+        for prime in primes:
+            counter[prime] += 1
+        return PrimeFactorization(counter)
