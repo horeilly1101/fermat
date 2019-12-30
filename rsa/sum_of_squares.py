@@ -11,6 +11,9 @@ class SumOfSquares:
         self.b = b
         self.result = result
 
+    def __str__(self):
+        return f"SumOfSquares(a={self.a}, b={self.b}, result={self.result})"
+
     def combine(self, other: "SumOfSquares") -> "SumOfSquares":
         return SumOfSquares(
             self.a * other.a + self.b * other.b,
@@ -33,6 +36,10 @@ class SumOfSquares:
         )
 
     @staticmethod
+    def get_multiplicative_inverse():
+        return SumOfSquares(1, 0, 1)
+
+    @staticmethod
     def exists_from_prime_factorization(prime_factorization: PrimeFactorization) -> bool:
         return all(
             prime % 4 == 1 or prime == 2 or exponent % 2 == 0
@@ -47,6 +54,8 @@ class SumOfSquares:
 
     @staticmethod
     def _make_from_prime(prime: int) -> "SumOfSquares":
+        print(prime)
+
         if prime == 2:
             return SumOfSquares(1, 1, 2)
 
@@ -57,7 +66,6 @@ class SumOfSquares:
         non_residue = get_quadratic_non_residue(prime)
         z = pow(non_residue, (prime - 1) // 4, prime)
         multiple = (pow(z, 2) + 1) // prime
-
         assert pow(z, 2) + 1 == multiple * prime
 
         # Perform Fermat's Descent Procedure
@@ -67,13 +75,15 @@ class SumOfSquares:
             u = descent_sum_of_squares.a % multiple
             v = descent_sum_of_squares.b % multiple
 
+            # make sure u and v are in the interval
+            # (- multiple / 2, multiple / 2)
             if u > multiple / 2:
                 u -= multiple
             if v > multiple / 2:
                 v -= multiple
 
             new_multiple = (pow(u, 2) + pow(v, 2)) // multiple
-            new_sum_of_squares = SumOfSquares(u, v, prime * new_multiple)
+            new_sum_of_squares = SumOfSquares(u, v, multiple * new_multiple)
 
             descent_sum_of_squares = (
                 descent_sum_of_squares
@@ -95,7 +105,8 @@ class SumOfSquares:
 
         return reduce(
             lambda result, prime: result.combine(raise_prime_to_power(prime)),
-            prime_factorization.prime_factors
+            prime_factorization.prime_factors,
+            SumOfSquares.get_multiplicative_inverse()
         )
 
     @staticmethod

@@ -23,3 +23,6 @@ class TestSumOfSquares(unittest.TestCase):
             pow(17, 5),
             pow(sos_raised.a, 2) + pow(sos_raised.b, 2)
         )
+
+    def test_make(self):
+        print(SumOfSquares.make(9))
