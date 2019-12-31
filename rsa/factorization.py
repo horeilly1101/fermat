@@ -23,6 +23,10 @@ class PrimeFactorization:
         return str(self)
 
     def compute_product(self):
+        """
+        :return: the positive integer represented by the prime
+            factorization.
+        """
         return reduce(
             lambda result, num: result * pow(num, self.get_exponent(num)),
             self.prime_factors,

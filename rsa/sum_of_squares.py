@@ -13,8 +13,8 @@ class SumOfSquares:
     def __init__(self, a: int, b: int, result: int):
         assert pow(a, 2) + pow(b, 2) == result
 
-        self.a = abs(a)
-        self.b = abs(b)
+        self.a = a
+        self.b = b
         self.result = result
 
     def __str__(self):

@@ -19,3 +19,9 @@ class TestPrimeFactorization(unittest.TestCase):
                 PrimeFactorization.of(*factors),
                 PrimeFactorization.factor(num)
             )
+
+    def test_compute_product(self):
+        self.assertEqual(
+            1,
+            PrimeFactorization.of().compute_product()
+        )
