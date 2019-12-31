@@ -1,4 +1,4 @@
-from rsa.utils import EvenFactorization
+from rsa.factorization import EvenFactorization
 
 
 def get_quadratic_non_residue(number):

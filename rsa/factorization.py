@@ -24,7 +24,7 @@ class PrimeFactorization:
 
     def compute_product(self):
         return reduce(
-            lambda result, num: result * pow(num, self.prime_factors[num]),
+            lambda result, num: result * pow(num, self.get_exponent(num)),
             self.prime_factors,
             1
         )
@@ -40,9 +40,18 @@ class PrimeFactorization:
 
     @staticmethod
     def factor(num) -> "PrimeFactorization":
+        # ------------------------
+        # Algorithm: out-of-the-box sieve of Eratosthenes
+        # ------------------------
+
         # create list of prime numbers <= num
         prime_candidates: list = [j for j in range(2, num + 1)]
+
         for i in range(2, math.ceil(math.sqrt(num))):
+            # check if i is composite
+            if prime_candidates[i - 2] is None:
+                continue
+
             for multiple in range(2, num // i + 1):
                 prime_candidates[i * multiple - 2] = None
 
@@ -63,8 +72,43 @@ class PrimeFactorization:
         return PrimeFactorization(prime_factors)
 
     @staticmethod
-    def of(*primes):
+    def of(*primes: int) -> "PrimeFactorization":
         counter = collections.Counter()
         for prime in primes:
             counter[prime] += 1
         return PrimeFactorization(counter)
+
+
+class EvenFactorization:
+    """
+    Class that represents an integer with the factors of 2
+    divided out. It represents an integer n as
+        n = self.base * (2 ^ self.two_power).
+    """
+    def __init__(self, base: int, two_power: int):
+        self.base = base
+        self.two_power = two_power
+
+    def compute_product(self) -> int:
+        """
+        Multiply out the factorization.
+        :return: product
+        """
+        return self.base * pow(2, self.two_power)
+
+    @staticmethod
+    def factor(num: int) -> "EvenFactorization":
+        """
+        Compute a number's even factorization.
+        :param num: input number
+        :return: even factorization
+        """
+        base = num
+        two_power = 0
+
+        # divide out the greatest power of 2
+        while base % 2 == 0:
+            base //= 2
+            two_power += 1
+
+        return EvenFactorization(base, two_power)

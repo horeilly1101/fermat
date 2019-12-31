@@ -1,10 +1,15 @@
-from rsa.prime_factorization import PrimeFactorization
+from rsa.factorization import PrimeFactorization
 from rsa.quadratic_reciprocity import get_quadratic_non_residue
 from rsa.primality_testing import is_prime
 from functools import reduce
 
 
 class SumOfSquares:
+    """
+    Data structure that represents a sum of two squares
+    of the form
+        a^2 + b^2 = result.
+    """
     def __init__(self, a: int, b: int, result: int):
         assert pow(a, 2) + pow(b, 2) == result
 
@@ -15,7 +20,7 @@ class SumOfSquares:
     def __str__(self):
         return f"SumOfSquares(a={self.a}, b={self.b}, result={self.result})"
 
-    def combine(self, other: "SumOfSquares") -> "SumOfSquares":
+    def multiply(self, other: "SumOfSquares") -> "SumOfSquares":
         return SumOfSquares(
             self.a * other.a + self.b * other.b,
             self.b * other.a - self.a * other.b,
@@ -24,7 +29,7 @@ class SumOfSquares:
 
     def raise_to_power(self, power: int) -> "SumOfSquares":
         return reduce(
-            lambda result, _: result.combine(self),
+            lambda result, _: result.multiply(self),
             range(power - 1),
             self
         )
@@ -41,14 +46,27 @@ class SumOfSquares:
         return SumOfSquares(1, 0, 1)
 
     @staticmethod
-    def exists_from_prime_factorization(prime_factorization: PrimeFactorization) -> bool:
+    def exists_from_prime_factorization(pf: PrimeFactorization) -> bool:
+        """
+        :param pf: a prime factorization object
+        :return: whether or not there exist positive integers a, b
+            such that a^2 + b^2 = number
+        """
         return all(
-            prime % 4 == 1 or prime == 2 or exponent % 2 == 0
-            for prime, exponent in prime_factorization.prime_factors.items()
+            prime % 4 == 1
+            or prime == 2
+            or pf.get_exponent(prime) % 2 == 0
+
+            for prime in pf.get_distinct_prime_factors()
         )
 
     @staticmethod
     def exists(number: int) -> bool:
+        """
+        :param number: a positive integer
+        :return: whether or not there exist positive integers a, b
+            such that a^2 + b^2 = number
+        """
         if is_prime(number) and number % 4 == 1:
             return True
 
@@ -91,7 +109,7 @@ class SumOfSquares:
 
             descent_sum_of_squares = (
                 descent_sum_of_squares
-                .combine(new_sum_of_squares)
+                .multiply(new_sum_of_squares)
                 .divide_out_root(multiple)
             )
             multiple = new_multiple
@@ -99,9 +117,9 @@ class SumOfSquares:
         return descent_sum_of_squares
 
     @staticmethod
-    def make_from_prime_factorization(prime_factorization: PrimeFactorization) -> "SumOfSquares":
+    def make_from_prime_factorization(pf: PrimeFactorization) -> "SumOfSquares":
         def make_from_prime_power(prime):
-            exponent = prime_factorization.prime_factors[prime]
+            exponent = pf.get_exponent(prime)
 
             if exponent % 2 == 0:
                 return SumOfSquares(
@@ -113,12 +131,12 @@ class SumOfSquares:
             return (
                 SumOfSquares
                 ._make_from_prime(prime)
-                .raise_to_power(prime_factorization.prime_factors[prime])
+                .raise_to_power(exponent)
             )
 
         return reduce(
-            lambda result, prime: result.combine(make_from_prime_power(prime)),
-            prime_factorization.prime_factors,
+            lambda result, prime: result.multiply(make_from_prime_power(prime)),
+            pf.get_distinct_prime_factors(),
             SumOfSquares.get_multiplicative_identity()
         )
 
