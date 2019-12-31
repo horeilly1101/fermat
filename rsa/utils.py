@@ -2,7 +2,6 @@
 File that contains various utility functions.
 """
 from rsa.ld_expression import LDExpression
-from functools import reduce
 from typing import List
 
 
@@ -22,18 +21,6 @@ def compute_modular_inverse(a: int, modulus: int) -> int:
     # doesn't exist
     assert solution.evaluate() == 1
     return solution.x
-
-
-# def euler_totient(*distinct_prime_factors: int) -> int:
-#     """
-#     Function that computes the euler totient function of
-#     a number composed of distinct prime factors.
-#     """
-#     return reduce(
-#         lambda result, prime: result * (prime - 1),
-#         distinct_prime_factors,
-#         1
-#     )
 
 
 def gcd(a: int, b: int) -> int:
@@ -64,3 +51,9 @@ def get_divisors(num: int) -> List[int]:
         i for i in range(1, num + 1)
         if num % i == 0
     ]
+
+
+def get_divisors_generator(num: int) -> List[int]:
+    for divisor_candidate in range(1, num + 1):
+        if num % divisor_candidate == 0:
+            yield divisor_candidate

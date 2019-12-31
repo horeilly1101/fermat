@@ -1,14 +1,11 @@
 import unittest
-from rsa.encryption_device import RSAAlgorithm
+from rsa.cryptography.rsa_algorithm import RSAAlgorithm
+from tests import testing_utils
 
 
 class TestEncryptionDevice(unittest.TestCase):
     def test_rsa_algorithm(self):
-        messages = [
-            "hi", "password", ". . . #$% !", "0123456789"
-        ]
-
-        for message in messages:
+        for message in testing_utils.PRIMES + testing_utils.NON_PRIMES:
             rsa = RSAAlgorithm()
             self.assertEqual(
                 message,
