@@ -24,16 +24,16 @@ def compute_modular_inverse(a: int, modulus: int) -> int:
     return solution.x
 
 
-def euler_totient(*distinct_prime_factors: int) -> int:
-    """
-    Function that computes the euler totient function of
-    a number composed of distinct prime factors.
-    """
-    return reduce(
-        lambda result, prime: result * (prime - 1),
-        distinct_prime_factors,
-        1
-    )
+# def euler_totient(*distinct_prime_factors: int) -> int:
+#     """
+#     Function that computes the euler totient function of
+#     a number composed of distinct prime factors.
+#     """
+#     return reduce(
+#         lambda result, prime: result * (prime - 1),
+#         distinct_prime_factors,
+#         1
+#     )
 
 
 def gcd(a: int, b: int) -> int:

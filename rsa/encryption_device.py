@@ -4,6 +4,7 @@ File that contains the encryption devices.
 from rsa.random_prime_generator import RandomPrimeGenerator
 from rsa import utils
 from rsa.serializer import AsciiSerializer
+from rsa.arithmetic_function.euler_totient_function import EulerTotientFunction
 
 
 class EncryptionDevice:
@@ -48,6 +49,8 @@ class AESAlgorithm(EncryptionDevice):
 
 
 class RSAAlgorithm(EncryptionDevice):
+    EULER_TOTIENT = EulerTotientFunction()
+
     """
     Encryption device that uses the RSA algorithm.
     """
@@ -63,7 +66,7 @@ class RSAAlgorithm(EncryptionDevice):
         # where phi is the euler totient function
         self.private_key = utils.compute_modular_inverse(
             self.public_key,
-            utils.euler_totient(p, q)
+            self.EULER_TOTIENT.evaluate_from_primes(p, q)
         )
 
         self.serializer = AsciiSerializer()

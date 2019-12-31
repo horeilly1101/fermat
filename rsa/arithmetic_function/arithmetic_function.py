@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
-from functools import reduce
+
+from rsa import utils as utils
 from rsa.factorization import PrimeFactorization
-import rsa.utils as utils
 
 
 class ArithmeticFunction(ABC):
@@ -25,23 +25,3 @@ class ArithmeticFunction(ABC):
                     for divisor in utils.get_divisors(num)
                 ])
         return DirichletProduct()
-
-
-class EulerTotientFunction(ArithmeticFunction):
-    def evaluate(self, num: int):
-        return self.evaluate_from_prime_factorization(
-            PrimeFactorization.factor(num)
-        )
-
-    def evaluate_from_prime_factorization(self, pf: PrimeFactorization):
-        def evaluate_from_prime_power(prime):
-            return (
-                pow(prime, pf.get_exponent(prime))
-                - pow(prime, pf.get_exponent(prime) - 1)
-            )
-
-        return reduce(
-            lambda result, prime: result * evaluate_from_prime_power(prime),
-            pf.get_distinct_prime_factors(),
-            1
-        )
