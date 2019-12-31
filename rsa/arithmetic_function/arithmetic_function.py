@@ -18,10 +18,11 @@ class ArithmeticFunction(ABC):
         )
 
     def get_dirichlet_product(self, af: "ArithmeticFunction") -> "ArithmeticFunction":
-        class DirichletProduct(ArithmeticFunction):
+        class DirichletProductFunction(ArithmeticFunction):
             def evaluate(self, num: int):
                 return sum([
                     self.evaluate(divisor) * af.evaluate(num // divisor)
                     for divisor in utils.get_divisors(num)
                 ])
-        return DirichletProduct()
+
+        return DirichletProductFunction()
