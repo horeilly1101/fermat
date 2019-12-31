@@ -18,7 +18,7 @@ class SigmaFunction(SigmaKFunction):
         super().__init__(1)
 
 
-class DFunction(SigmaKFunction):
+class DivisorFunction(SigmaKFunction):
     def __init__(self):
         super().__init__(0)
 

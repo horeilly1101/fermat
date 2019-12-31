@@ -18,14 +18,13 @@ class ArithmeticFunction(ABC):
         )
 
     def compute_dirichlet_product(self, af: "ArithmeticFunction") -> "ArithmeticFunction":
+        original_function = self
+
         class DirichletProductFunction(ArithmeticFunction):
             def evaluate(self, num: int):
                 return sum([
-                    self.evaluate(divisor) * af.evaluate(num // divisor)
+                    original_function.evaluate(divisor) * af.evaluate(num // divisor)
                     for divisor in utils.get_divisors(num)
                 ])
-
-            def evaluate_from_prime_factorization(self, pf: PrimeFactorization):
-                pass
 
         return DirichletProductFunction()
