@@ -1,4 +1,4 @@
-from rsa.arithmetic_function.arithmetic_function import ArithmeticFunction
+from rsa.arithmetic_functions.arithmetic_function import ArithmeticFunction
 
 
 class DeltaFunction(ArithmeticFunction):

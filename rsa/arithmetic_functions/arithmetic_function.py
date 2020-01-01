@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 from rsa import utils as utils
-from rsa.factorization import PrimeFactorization
+from rsa.factorizations.prime_factorization import PrimeFactorization
 
 
 class ArithmeticFunction(ABC):

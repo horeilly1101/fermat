@@ -1,5 +1,5 @@
-from rsa.arithmetic_function.arithmetic_function import ArithmeticFunction
-from rsa.factorization import PrimeFactorization
+from rsa.arithmetic_functions.arithmetic_function import ArithmeticFunction
+from rsa.factorizations.prime_factorization import PrimeFactorization
 
 
 class MobiusFunction(ArithmeticFunction):

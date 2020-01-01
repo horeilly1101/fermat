@@ -1,9 +1,11 @@
-from functools import reduce
-import math
 import collections
+import math
+from functools import reduce
+
+from rsa.factorizations.factorization import Factorization
 
 
-class PrimeFactorization:
+class PrimeFactorization(Factorization):
     def __init__(self, prime_factors):
         self.prime_factors = prime_factors
 
@@ -81,38 +83,3 @@ class PrimeFactorization:
         for prime in primes:
             counter[prime] += 1
         return PrimeFactorization(counter)
-
-
-class EvenFactorization:
-    """
-    Class that represents an integer with the factors of 2
-    divided out. It represents an integer n as
-        n = self.base * (2 ^ self.two_power).
-    """
-    def __init__(self, base: int, two_power: int):
-        self.base = base
-        self.two_power = two_power
-
-    def compute_product(self) -> int:
-        """
-        Multiply out the factorization.
-        :return: product
-        """
-        return self.base * pow(2, self.two_power)
-
-    @staticmethod
-    def factor(num: int) -> "EvenFactorization":
-        """
-        Compute a number's even factorization.
-        :param num: input number
-        :return: even factorization
-        """
-        base = num
-        two_power = 0
-
-        # divide out the greatest power of 2
-        while base % 2 == 0:
-            base //= 2
-            two_power += 1
-
-        return EvenFactorization(base, two_power)

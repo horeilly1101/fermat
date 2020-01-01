@@ -1,5 +1,5 @@
 import unittest
-from rsa.serializer import AsciiSerializer
+from rsa.cryptography.serializer import AsciiSerializer
 
 
 class TestSerializer(unittest.TestCase):

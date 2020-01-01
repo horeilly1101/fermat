@@ -1,6 +1,6 @@
 import unittest
 from rsa.sum_of_squares import SumOfSquares
-from rsa.factorization import PrimeFactorization
+from rsa.factorizations.prime_factorization import PrimeFactorization
 import tests.testing_utils as utils
 
 

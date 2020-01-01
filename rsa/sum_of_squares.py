@@ -1,4 +1,4 @@
-from rsa.factorization import PrimeFactorization
+from rsa.factorizations.prime_factorization import PrimeFactorization
 from rsa.quadratic_reciprocity import get_quadratic_non_residue
 from rsa.primality_testing import is_prime
 from functools import reduce

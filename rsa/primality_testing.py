@@ -1,7 +1,7 @@
 """
 File that contains various utility methods for primality testing.
 """
-from rsa.factorization import EvenFactorization
+from rsa.factorizations.even_factorization import EvenFactorization
 
 
 def _is_witness(possible_prime: int, witness_candidate: int) -> bool:

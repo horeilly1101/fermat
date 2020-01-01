@@ -1,5 +1,5 @@
 from rsa import utils
-from rsa.arithmetic_function import phi
+from rsa.arithmetic_functions import phi
 from rsa.cryptography import EncryptionDevice
 from rsa.random_prime_generator import RandomPrimeGenerator
 

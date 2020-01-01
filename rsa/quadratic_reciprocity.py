@@ -1,7 +1,9 @@
-from rsa.factorization import EvenFactorization
+from rsa.factorizations.prime_factorization import PrimeFactorization
+from rsa.factorizations.even_factorization import EvenFactorization
+from rsa.primality_testing import is_prime
 
 
-def get_quadratic_non_residue(number):
+def get_quadratic_non_residue(number: int) -> int:
     """
     :param number: positive integer greater than 2
     :return: a quadratic non residue mod number
@@ -11,6 +13,13 @@ def get_quadratic_non_residue(number):
             return i
 
     raise ValueError(f"No quadratic non residues of {number} found!")
+
+
+def is_quadratic_residue(x, modulus) -> bool:
+    if is_prime(modulus):
+        return compute_jacobi_symbol(x, modulus)
+
+    raise ValueError()
 
 
 def compute_jacobi_symbol(x, modulus):
