@@ -29,10 +29,10 @@ def gcd(a: int, b: int) -> int:
     """
     # Compute using Euclid's algorithm
     if a == 0:
-        return b
+        return abs(b)
 
     if b == 0:
-        return a
+        return abs(a)
 
     return gcd(b, a % b)
 
