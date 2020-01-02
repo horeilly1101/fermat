@@ -1,7 +1,6 @@
 import collections
 import math
 from functools import reduce
-
 from rsa.factorizations.factorization import Factorization
 
 
