@@ -32,6 +32,10 @@ def cf_representation_generator(number: Number) -> Iterator[int]:
         except ZeroDivisionError:
             break
 
+    # after termination, just return 0
+    while True:
+        yield 0
+
 
 def periodic_cf_representation_generator(
     representation: List[int],

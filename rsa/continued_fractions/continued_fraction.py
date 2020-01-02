@@ -1,11 +1,16 @@
-import math
-from typing import List
+from typing import NamedTuple
 
-from rsa.continued_fractions.expression import Number, IrrationalFraction, \
-    IrrationalSum, SquareRoot
-from rsa.continued_fractions.generators import cf_representation_generator, \
-    periodic_cf_representation_generator
+from rsa.continued_fractions.expression import Number
+from rsa.continued_fractions.generators import cf_representation_generator
 from rsa import utils
+
+
+class Convergent(NamedTuple):
+    p: int
+    q: int
+
+    def evaluate(self):
+        return self.p / self.q
 
 
 class ContinuedFraction:
@@ -15,8 +20,25 @@ class ContinuedFraction:
     def __iter__(self):
         return self.generator_factory.create()
 
-    def get_convergent(self, n: int):
-        pass
+    def get_convergent(self, n: int) -> Convergent:
+        assert n >= 0
+        prev_convergent = Convergent(1, 0)
+        global convergent
+
+        for i, a_i in self:
+            if i == 0:
+                convergent = Convergent(a_i, 1)
+                continue
+
+            prev_convergent, convergent = (
+                convergent,
+                Convergent(
+                    a_i * convergent.p + prev_convergent.p,
+                    a_i * convergent.q + prev_convergent.q
+                )
+            )
+
+        return convergent
 
     @staticmethod
     def make(num_callable):
@@ -26,49 +48,3 @@ class ContinuedFraction:
         )
 
         return ContinuedFraction(factory)
-
-
-class PeriodicContinuedFraction(ContinuedFraction):
-    def __init__(self, representation: List[int], repeat_idx):
-        self.representation = representation
-        self.repeat_idx = repeat_idx
-
-        factory = utils.GeneratorFactory(
-            periodic_cf_representation_generator,
-            representation=representation,
-            repeat_idx=repeat_idx
-        )
-        super().__init__(factory)
-
-    @staticmethod
-    def make_from_square_root(square_root: "SquareRoot") -> "PeriodicContinuedFraction":
-        constants = []
-        alphas = set()
-
-        # set initial conditions
-        a = math.floor(square_root.evaluate())
-        alpha = IrrationalFraction(
-            IrrationalSum(square_root, 1, 0),
-            IrrationalSum(square_root, 0, 1)
-        )
-
-        while alpha not in alphas:
-            constants.append(a)
-            alphas.add(alpha)
-
-            alpha = IrrationalFraction(
-                IrrationalSum(
-                    square_root,
-                    alpha.sum2.const2 * alpha.sum1.const1,
-                    -1 * alpha.sum2.const2 * (alpha.sum1.const2 - a * alpha.sum2.const2)
-                ),
-                IrrationalSum(
-                    square_root,
-                    0,
-                    pow(alpha.sum1.const1, 2) * square_root.square
-                    - pow(alpha.sum1.const2 - a * alpha.sum2.const2, 2)
-                )
-            ).simplify()
-            a = math.floor(alpha.evaluate())
-
-        return PeriodicContinuedFraction(constants, repeat_idx=1)

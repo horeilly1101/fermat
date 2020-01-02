@@ -2,10 +2,8 @@ import unittest
 import math
 from itertools import tee
 
-from rsa.continued_fractions.continued_fraction import ContinuedFraction, \
-    PeriodicContinuedFraction
-from rsa.continued_fractions.generators import cf_representation_generator, \
-    periodic_cf_representation_generator
+from rsa.continued_fractions.continued_fraction import ContinuedFraction
+from rsa.continued_fractions import PeriodicContinuedFraction
 from rsa.continued_fractions.expression import SquareRoot
 
 
