@@ -57,3 +57,12 @@ def get_divisors_generator(num: int) -> List[int]:
     for divisor_candidate in range(1, num + 1):
         if num % divisor_candidate == 0:
             yield divisor_candidate
+
+
+class GeneratorFactory:
+    def __init__(self, generator_func, **kwargs):
+        self._generator_func = generator_func
+        self._kwargs = kwargs
+
+    def create(self):
+        return self._generator_func(**self._kwargs)

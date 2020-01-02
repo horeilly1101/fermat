@@ -1,7 +1,7 @@
 """Testing for primality testing."""
 import unittest
 from rsa.primality_testing import is_prime
-from tests.testing_utils import PRIMES, NON_PRIMES
+from tests.utils import PRIMES, NON_PRIMES
 
 
 class TestPrimalityTesting(unittest.TestCase):

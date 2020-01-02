@@ -1,6 +1,6 @@
 import unittest
 import rsa.utils as utils
-from tests.testing_utils import PRIMES
+from tests.utils import PRIMES
 
 
 class TestUtils(unittest.TestCase):

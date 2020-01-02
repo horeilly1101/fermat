@@ -34,7 +34,7 @@ class SumOfSquares:
             self
         )
 
-    def divide_out_root(self, root):
+    def divide_out_root(self, root: int) -> "SumOfSquares":
         return SumOfSquares(
             self.a // root,
             self.b // root,
@@ -42,7 +42,7 @@ class SumOfSquares:
         )
 
     @staticmethod
-    def get_multiplicative_identity():
+    def get_multiplicative_identity() -> "SumOfSquares":
         return SumOfSquares(1, 0, 1)
 
     @staticmethod

@@ -1,7 +1,7 @@
 import unittest
 import random
 from rsa.ld_expression import LDExpression
-from tests.testing_utils import PRIMES
+from tests.utils import PRIMES
 
 
 class TestLDExpression(unittest.TestCase):
