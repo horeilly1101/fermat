@@ -1,16 +1,7 @@
-from typing import NamedTuple
-
+from rsa.continued_fractions.convergent import Convergent
 from rsa.continued_fractions.expression import Number
 from rsa.continued_fractions.generators import cf_representation_generator
 from rsa import utils
-
-
-class Convergent(NamedTuple):
-    p: int
-    q: int
-
-    def evaluate(self):
-        return self.p / self.q
 
 
 class ContinuedFraction:
@@ -20,12 +11,16 @@ class ContinuedFraction:
     def __iter__(self):
         return self.generator_factory.create()
 
+    def get_terms(self, num_terms: int):
+        for _, a_i in zip(range(num_terms), self):
+            yield a_i
+
     def get_convergent(self, n: int) -> Convergent:
         assert n >= 0
         prev_convergent = Convergent(1, 0)
-        global convergent
+        convergent = None
 
-        for i, a_i in self:
+        for i, a_i in enumerate(self.get_terms(n + 1)):
             if i == 0:
                 convergent = Convergent(a_i, 1)
                 continue

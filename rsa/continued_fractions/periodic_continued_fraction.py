@@ -2,7 +2,8 @@ import math
 from typing import List
 
 from rsa import utils
-from rsa.continued_fractions import ContinuedFraction, IrrationalFraction, IrrationalSum
+from rsa.continued_fractions.continued_fraction import ContinuedFraction
+from rsa.continued_fractions.expression import IrrationalFraction, IrrationalSum, SquareRoot
 from rsa.continued_fractions.generators import periodic_cf_representation_generator
 
 
@@ -24,11 +25,11 @@ class PeriodicContinuedFraction(ContinuedFraction):
         alphas = set()
 
         # set initial conditions
-        a = math.floor(square_root.evaluate())
         alpha = IrrationalFraction(
             IrrationalSum(square_root, 1, 0),
             IrrationalSum(square_root, 0, 1)
         )
+        a = math.floor(square_root.evaluate())
 
         while alpha not in alphas:
             constants.append(a)

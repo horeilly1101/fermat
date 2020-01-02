@@ -1,7 +1,7 @@
 """
 File that contains various utility functions.
 """
-from rsa.ld_expression import LDExpression
+from rsa.diophantine_equations.ld_expression import LDExpression
 from typing import List
 
 
