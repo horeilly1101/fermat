@@ -9,10 +9,16 @@ class PellLikeSolution(DiophantineSolution):
         self.x = x
         self.y = y
 
+    def __str__(self):
+        return f"x={self.x} y={self.y} expression={self.expression}"
+
 
 class PellLikeExpression(DiophantineExpression):
     def __init__(self, d: int):
         self.d = d
+
+    def __str__(self):
+        return f"x^2 - {self.d} * y^2"
 
     def evaluate(self, solution: PellLikeSolution) -> int:
         return pow(solution.x, 2) - self.d * pow(solution.y, 2)

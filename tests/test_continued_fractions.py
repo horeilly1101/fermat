@@ -1,8 +1,8 @@
 import unittest
 from mpmath import pi, mp, e
-import random
 from rsa.continued_fractions import PeriodicContinuedFraction, ContinuedFraction
 from rsa.diophantine_expressions.pell_like_expression import PellLikeExpression
+from tests import utils
 
 
 class TestContinuedFraction(unittest.TestCase):
@@ -19,7 +19,7 @@ class TestContinuedFraction(unittest.TestCase):
     def test_pell(self):
         for _ in range(20):
             expr = PellLikeExpression(
-                pow(random.randint(2, 10000), 2) - 1
+                utils.get_random_non_perfect_square()
             )
             solution = expr.solve(1)
             self.assertEqual(

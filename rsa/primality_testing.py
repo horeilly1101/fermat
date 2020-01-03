@@ -49,7 +49,7 @@ def is_prime(num: int) -> bool:
         return False
 
     # perform Rabin-Miller test for composite numbers
-    for witness_candidate in range(2, min(num, 102)):  # check up to 100 witnesses
+    for witness_candidate in range(2, min(num, 52)):  # check up to 100 witnesses
         if _is_witness(num, witness_candidate):
             return False
 
