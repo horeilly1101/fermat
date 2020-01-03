@@ -2,7 +2,7 @@
 File that contains various utility functions.
 """
 from typing import List
-from rsa.diophantine_expressions.linear_equation import LinearExpression
+from rsa.diophantine_expressions.linear_expression import LinearExpression
 
 
 def compute_modular_inverse(a: int, modulus: int) -> int:

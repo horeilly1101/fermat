@@ -13,16 +13,16 @@ class LinearSolution(DiophantineSolution):
     are infinitely many solutions x,y. You can compute any
     of the other solutions with a linear shift.
     """
-    def __init__(self, equation: "LinearExpression", x: int, y: int):
-        super().__init__(equation)
+    def __init__(self, expression: "LinearExpression", x: int, y: int):
+        super().__init__(expression)
         self.x = x
         self.y = y
 
     def shift(self, k: int) -> "LinearSolution":
         value = self.evaluate()
-        return self.equation.make_solution(
-            self.x + k * (self.equation.b // value),
-            self.y - k * (self.equation.a // value)
+        return self.expression.make_solution(
+            self.x + k * (self.expression.b // value),
+            self.y - k * (self.expression.a // value)
         )
 
     def make_x_positive(self) -> "LinearSolution":
@@ -51,11 +51,9 @@ class LinearExpression(DiophantineExpression):
 
     def solution_exists(self, value: int) -> bool:
         from rsa import utils
-
         return value % utils.gcd(self.a, self.b) == 0
 
     def solve(self, value: int) -> LinearSolution:
-        assert self.solution_exists(value)
         from rsa import utils
 
         multiple = value // utils.gcd(self.a, self.b)

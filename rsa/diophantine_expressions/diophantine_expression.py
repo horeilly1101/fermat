@@ -2,11 +2,11 @@ from abc import ABC, abstractmethod
 
 
 class DiophantineSolution(ABC):
-    def __init__(self, equation: "DiophantineExpression"):
-        self.equation = equation
+    def __init__(self, expression: "DiophantineExpression"):
+        self.expression = expression
 
-    def evaluate(self):
-        return self.equation.evaluate(self)
+    def evaluate(self) -> int:
+        return self.expression.evaluate(self)
 
 
 class DiophantineExpression(ABC):
@@ -19,5 +19,5 @@ class DiophantineExpression(ABC):
         pass
 
     @abstractmethod
-    def evaluate(self, solution: DiophantineSolution):
+    def evaluate(self, solution: DiophantineSolution) -> int:
         pass
