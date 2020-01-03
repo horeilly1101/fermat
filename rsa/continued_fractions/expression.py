@@ -16,18 +16,6 @@ class Number(Expression):
     def __init__(self, value_callable):
         self._value_callable = value_callable
 
-    def __eq__(self, other):
-        if not isinstance(other, Number):
-            return False
-
-        return self._value_callable() == other._value_callable()
-
-    def __hash__(self):
-        return hash(self._value_callable())
-
-    def __repr__(self):
-        return f"<Number value={self._value_callable()}>"
-
     def __str__(self):
         return f"Number({self._value_callable()})"
 
@@ -56,22 +44,6 @@ class IrrationalSum(Expression):
         self.const1 = const1
         self.const2 = const2
 
-    def __eq__(self, other):
-        if not isinstance(other, IrrationalSum):
-            return False
-
-        return (
-                self._number == other._number
-                and self.const1 == other.const1
-                and self.const2 == other.const2
-        )
-
-    def __hash__(self):
-        return hash(self._number) + hash(self.const1) + hash(self.const2)
-
-    def __repr__(self):
-        return f"<IrrationalSum irrational={self._number} const1={self.const1} const2={self.const2}>"
-
     def __str__(self):
         return f"{self.const1} * {self._number} + {self.const2}"
 
@@ -97,21 +69,6 @@ class IrrationalFraction(Expression):
     def __init__(self, sum1: IrrationalSum, sum2: IrrationalSum):
         self.sum1 = sum1
         self.sum2 = sum2
-
-    def __eq__(self, other):
-        if not isinstance(other, IrrationalFraction):
-            return False
-
-        return (
-            self.sum1 == other.sum1
-            and self.sum2 == other.sum2
-        )
-
-    def __hash__(self):
-        return hash(self.sum1) + hash(self.sum2)
-
-    def __repr__(self):
-        return f"<IrrationalFraction sum1={self.sum1} sum2={self.sum2}>"
 
     def __str__(self):
         return f"{self.sum1} / {self.sum2}"

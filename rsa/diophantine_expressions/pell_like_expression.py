@@ -23,14 +23,14 @@ class PellLikeExpression(DiophantineExpression):
     def solve(self, value: int) -> PellLikeSolution:
         assert value == 1
 
-        continued_fraction = PeriodicContinuedFraction.make_for_square_root(self.d)
-        if continued_fraction.period_length % 2 == 0:
-            convergent = continued_fraction.get_convergent(
-                continued_fraction.period_length - 1
+        cf = PeriodicContinuedFraction.make_for_square_root(self.d)
+        if cf.period_length % 2 == 0:
+            convergent = cf.get_convergent(
+                cf.period_length - 1
             )
         else:
-            convergent = continued_fraction.get_convergent(
-                2 * continued_fraction.period_length - 1
+            convergent = cf.get_convergent(
+                2 * cf.period_length - 1
             )
 
         return PellLikeSolution(self, convergent.p, convergent.q)
