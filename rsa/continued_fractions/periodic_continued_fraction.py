@@ -8,9 +8,10 @@ from rsa.continued_fractions.generators import periodic_cf_representation_genera
 
 
 class PeriodicContinuedFraction(ContinuedFraction):
-    def __init__(self, representation: List[int], repeat_idx):
+    def __init__(self, representation: List[int], repeat_idx: int):
         self.representation = representation
         self.repeat_idx = repeat_idx
+        self.period_length = len(representation) - repeat_idx
 
         factory = utils.GeneratorFactory(
             periodic_cf_representation_generator,
@@ -20,21 +21,22 @@ class PeriodicContinuedFraction(ContinuedFraction):
         super().__init__(factory)
 
     @staticmethod
-    def make_from_square_root(square_root: "SquareRoot") -> "PeriodicContinuedFraction":
+    def make_for_square_root(square: int) -> "PeriodicContinuedFraction":
         constants = []
-        alphas = set()
 
         # set initial conditions
+        square_root = SquareRoot(square)
+
         alpha = IrrationalFraction(
             IrrationalSum(square_root, 1, 0),
             IrrationalSum(square_root, 0, 1)
         )
         a = math.floor(square_root.evaluate())
 
-        while alpha not in alphas:
-            constants.append(a)
-            alphas.add(alpha)
+        constants.append(a)
+        starting_a = a
 
+        while a != 2 * starting_a:
             # compute next alpha from recurrence
             alpha = IrrationalFraction(
                 IrrationalSum(
@@ -50,5 +52,6 @@ class PeriodicContinuedFraction(ContinuedFraction):
                 )
             ).simplify()
             a = math.floor(alpha.evaluate())
+            constants.append(a)
 
         return PeriodicContinuedFraction(constants, repeat_idx=1)

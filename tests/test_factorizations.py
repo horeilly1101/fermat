@@ -10,8 +10,7 @@ class TestPrimeFactorization(unittest.TestCase):
             25: [5, 5],
             52: [2, 2, 13],
             33: [3, 11],
-            pow(11, 2) * pow(43, 2): [11, 11, 43, 43],
-            # pow(61, 3) * 101: [61, 61, 61, 101]
+            11 * pow(43, 2): [11, 43, 43]
         }
 
         for num, factors in factorizations.items():

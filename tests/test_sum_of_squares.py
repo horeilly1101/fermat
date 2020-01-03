@@ -1,5 +1,5 @@
 import unittest
-from rsa.diophantine_expressions.sum_of_squares import SumOfSquaresSolution, SumOfSquaresExpression
+from rsa.diophantine_expressions.sum_of_squares_expression import SumOfSquaresSolution, SumOfSquaresExpression
 from rsa.factorizations.prime_factorization import PrimeFactorization
 import tests.utils as utils
 
@@ -24,7 +24,7 @@ class TestSumOfSquares(unittest.TestCase):
             solution_raised.evaluate()
         )
 
-    def test_make(self):
+    def test_solve(self):
         sos = self.sos.solve_for_pf(
             PrimeFactorization.of(
                 *[prime for prime in utils.PRIMES if prime % 4 == 1]

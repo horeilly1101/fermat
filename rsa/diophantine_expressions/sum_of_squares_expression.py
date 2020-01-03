@@ -49,7 +49,7 @@ class SumOfSquaresExpression(DiophantineExpression):
     def get_mult_id(self) -> "SumOfSquaresSolution":
         return SumOfSquaresSolution(self, 1, 0)
 
-    def solution_exists_from_pf(self, pf: PrimeFactorization) -> bool:
+    def solution_exists_for_pf(self, pf: PrimeFactorization) -> bool:
         """
         :param pf: a prime factorization object
         :return: whether or not there exist positive integers a, b
@@ -72,11 +72,11 @@ class SumOfSquaresExpression(DiophantineExpression):
         if is_prime(value) and value % 4 == 1:
             return True
 
-        return self.solution_exists_from_pf(
+        return self.solution_exists_for_pf(
             PrimeFactorization.factor(value)
         )
 
-    def _make_from_prime(self, prime: int) -> "SumOfSquaresSolution":
+    def _solve_for_prime(self, prime: int) -> "SumOfSquaresSolution":
         if prime == 2:
             return SumOfSquaresSolution(self, 1, 1)
 
@@ -117,7 +117,7 @@ class SumOfSquaresExpression(DiophantineExpression):
 
         return descent_sum_of_squares
 
-    def solve_for_prime_power(self, prime, exponent):
+    def _solve_for_prime_power(self, prime, exponent):
         if exponent % 2 == 0:
             return SumOfSquaresSolution(
                 pow(prime, exponent // 2),
@@ -125,12 +125,12 @@ class SumOfSquaresExpression(DiophantineExpression):
                 pow(prime, exponent)
             )
 
-        return self._make_from_prime(prime).raise_to_power(exponent)
+        return self._solve_for_prime(prime).raise_to_power(exponent)
 
     def solve_for_pf(self, pf: PrimeFactorization) -> "SumOfSquaresSolution":
         return reduce(
             lambda result, prime: result.multiply(
-                self.solve_for_prime_power(prime, pf.get_exponent(prime))
+                self._solve_for_prime_power(prime, pf.get_exponent(prime))
             ),
             pf.get_distinct_prime_factors(),
             self.get_mult_id()
