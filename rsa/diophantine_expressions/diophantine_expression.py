@@ -2,20 +2,20 @@ from abc import ABC, abstractmethod
 
 
 class DiophantineSolution(ABC):
-    def __init__(self, equation: "DiophantineEquation"):
+    def __init__(self, equation: "DiophantineExpression"):
         self.equation = equation
 
     def evaluate(self):
         return self.equation.evaluate(self)
 
 
-class DiophantineEquation(ABC):
+class DiophantineExpression(ABC):
     @abstractmethod
-    def solution_exists(self) -> bool:
+    def solution_exists(self, value: int) -> bool:
         pass
 
     @abstractmethod
-    def solve(self) -> DiophantineSolution:
+    def solve(self, value: int) -> DiophantineSolution:
         pass
 
     @abstractmethod

@@ -1,7 +1,8 @@
-from typing import NamedTuple
+from rsa.diophantine_expressions.diophantine_expression import DiophantineExpression, \
+    DiophantineSolution
 
 
-class LDSolution(NamedTuple):
+class LinearSolution(DiophantineSolution):
     """
     This is a solution to a Linear Diophantine expression of
     the form
@@ -12,35 +13,31 @@ class LDSolution(NamedTuple):
     are infinitely many solutions x,y. You can compute any
     of the other solutions with a linear shift.
     """
-    expression: "LDExpression"
-    x: int
-    y: int
+    def __init__(self, equation: "LinearExpression", x: int, y: int):
+        super().__init__(equation)
+        self.x = x
+        self.y = y
 
-    def shift(self, k: int) -> "LDSolution":
+    def shift(self, k: int) -> "LinearSolution":
         value = self.evaluate()
-        return self.expression.make_solution(
-            self.x + k * (self.expression.b // value),
-            self.y - k * (self.expression.a // value)
+        return self.equation.make_solution(
+            self.x + k * (self.equation.b // value),
+            self.y - k * (self.equation.a // value)
         )
 
-    def make_x_positive(self) -> "LDSolution":
+    def make_x_positive(self) -> "LinearSolution":
         if self.x > 0:
             return self
 
         return self.shift(1)
 
-    def evaluate(self) -> int:
-        return self.expression.evaluate(self)
 
-
-class LDExpression:
+class LinearExpression(DiophantineExpression):
     """
     Class that represents a linear diophantine expression of
     the form
-        ax + by,
+        ax + by = c,
     where x and y are integer variables.
-
-    LD stands for Linear Diophantine.
     """
     def __init__(self, a: int, b: int):
         self.a = a
@@ -52,13 +49,33 @@ class LDExpression:
     def __repr__(self) -> str:
         return str(self)
 
-    def evaluate(self, solution: LDSolution) -> int:
+    def solution_exists(self, value: int) -> bool:
+        from rsa import utils
+
+        return value % utils.gcd(self.a, self.b) == 0
+
+    def solve(self, value: int) -> LinearSolution:
+        assert self.solution_exists(value)
+        from rsa import utils
+
+        multiple = value // utils.gcd(self.a, self.b)
+        gcd_solution = self.solve_for_gcd()
+        solution = LinearSolution(
+            self,
+            multiple * gcd_solution.x,
+            multiple * gcd_solution.y
+        )
+
+        assert solution.evaluate() == value
+        return solution
+
+    def evaluate(self, solution: LinearSolution) -> int:
         return self.a * solution.x + self.b * solution.y
 
-    def make_solution(self, x: int, y: int) -> LDSolution:
-        return LDSolution(self, x, y)
+    def make_solution(self, x: int, y: int) -> LinearSolution:
+        return LinearSolution(self, x, y)
 
-    def get_solution_to_gcd(self) -> LDSolution:
+    def solve_for_gcd(self) -> LinearSolution:
         """
         Compute a solution the the LDExpression that evaluates to
         the greatest common divisor of a and b. This is computed

@@ -1,5 +1,5 @@
 import unittest
-from rsa.diophantine_equations.sum_of_squares import SumOfSquares
+from rsa.diophantine_expressions.sum_of_squares import SumOfSquares
 from rsa.factorizations.prime_factorization import PrimeFactorization
 import tests.utils as utils
 

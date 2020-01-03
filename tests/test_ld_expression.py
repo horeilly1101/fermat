@@ -1,6 +1,6 @@
 import unittest
 import random
-from rsa.diophantine_equations.ld_expression import LDExpression
+from rsa.diophantine_expressions.linear_equation import LinearExpression
 from tests.utils import PRIMES
 
 
@@ -12,8 +12,8 @@ class TestLDExpression(unittest.TestCase):
                     # since primes are relatively prime, we expect
                     # their gcd to be 1, and we expect the generated
                     # solution to equal 1
-                    expr = LDExpression(p1, p2)
-                    solution = expr.get_solution_to_gcd()
+                    expr = LinearExpression(p1, p2)
+                    solution = expr.solve(1)
                     self.assertEqual(
                         1,
                         solution.evaluate()
@@ -27,8 +27,8 @@ class TestLDExpression(unittest.TestCase):
                     # construct our own gcd and make sure the solution
                     # equals it
                     gcd = random.randint(2, pow(10, 4))
-                    expr = LDExpression(p1 * gcd, p2 * gcd)
-                    solution = expr.get_solution_to_gcd()
+                    expr = LinearExpression(p1 * gcd, p2 * gcd)
+                    solution = expr.solve(gcd)
                     self.assertEqual(
                         gcd,
                         solution.evaluate()

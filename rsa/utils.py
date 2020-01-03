@@ -1,8 +1,8 @@
 """
 File that contains various utility functions.
 """
-from rsa.diophantine_equations.ld_expression import LDExpression
 from typing import List
+from rsa.diophantine_expressions.linear_equation import LinearExpression
 
 
 def compute_modular_inverse(a: int, modulus: int) -> int:
@@ -10,16 +10,18 @@ def compute_modular_inverse(a: int, modulus: int) -> int:
     Function to find a's inverse mod the modulus. i.e.
     compute a positive x such that ax = 1 mod modulus.
     """
+    equation = LinearExpression(a, modulus)
+    # if gcd(a, modulus) != 1, then a modular inverse
+    # doesn't exist
+    assert equation.solution_exists(1)
+
     solution = (
-        LDExpression(a, modulus)
-        # solve ax + modulus * y = gcd(a, modulus)
-        .get_solution_to_gcd()
+        equation
+        # solve ax + modulus * y = 1
+        .solve(1)
         .make_x_positive()
     )
 
-    # if gcd(a, modulus) != 1, then a modular inverse
-    # doesn't exist
-    assert solution.evaluate() == 1
     return solution.x
 
 
