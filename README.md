@@ -1,6 +1,6 @@
-# RSA
+# numbers
 
-> REST API & Python Library that generates arbitrarily large public/private keys for RSA encryption
+> A collection of efficient number theoretic algorithms and data structures
 
 [![Build Status](https://travis-ci.com/horeilly1101/rsa.svg?branch=master)](https://travis-ci.com/horeilly1101/rsa)
 [![codecov](https://codecov.io/gh/horeilly1101/rsa/branch/master/graph/badge.svg)](https://codecov.io/gh/horeilly1101/rsa)
