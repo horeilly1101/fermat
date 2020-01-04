@@ -10,6 +10,7 @@ class TestPrimeFactorization(unittest.TestCase):
             25: [5, 5],
             52: [2, 2, 13],
             33: [3, 11],
+            11 * pow(43, 2): [11, 43, 43],
             11 * pow(43, 2): [11, 43, 43]
         }
 

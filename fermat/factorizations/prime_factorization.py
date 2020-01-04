@@ -1,6 +1,6 @@
 import collections
+import functools
 import math
-from functools import reduce
 from fermat.factorizations.factorization import Factorization
 
 
@@ -28,7 +28,7 @@ class PrimeFactorization(Factorization):
         :return: the positive integer represented by the prime
             factorization.
         """
-        return reduce(
+        return functools.reduce(
             lambda result, num: result * pow(num, self.get_exponent(num)),
             self.prime_factors,
             1
@@ -44,6 +44,7 @@ class PrimeFactorization(Factorization):
         return list(self.prime_factors.keys())
 
     @staticmethod
+    @functools.lru_cache()
     def factor(num) -> "PrimeFactorization":
         # ------------------------
         # Algorithm: out-of-the-box sieve of Eratosthenes

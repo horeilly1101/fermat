@@ -1,9 +1,9 @@
+import functools
 from fermat.factorizations.prime_factorization import PrimeFactorization
 from fermat.quadratic_reciprocity import get_quadratic_non_residue
 from fermat.primality_testing import is_prime
 from fermat.diophantine_expressions.diophantine_expression import DiophantineSolution, \
     DiophantineExpression
-from functools import reduce
 
 
 class SumOfSquaresSolution(DiophantineSolution):
@@ -28,7 +28,7 @@ class SumOfSquaresSolution(DiophantineSolution):
         )
 
     def raise_to_power(self, power: int) -> "SumOfSquaresSolution":
-        return reduce(
+        return functools.reduce(
             lambda result, _: result.multiply(self),
             range(power - 1),
             self
@@ -76,6 +76,7 @@ class SumOfSquaresExpression(DiophantineExpression):
             PrimeFactorization.factor(value)
         )
 
+    @functools.lru_cache()  # cache repeated queries
     def _solve_for_prime(self, prime: int) -> "SumOfSquaresSolution":
         if prime == 2:
             return SumOfSquaresSolution(self, 1, 1)
@@ -128,7 +129,7 @@ class SumOfSquaresExpression(DiophantineExpression):
         return self._solve_for_prime(prime).raise_to_power(exponent)
 
     def solve_for_pf(self, pf: PrimeFactorization) -> "SumOfSquaresSolution":
-        return reduce(
+        return functools.reduce(
             lambda result, prime: result.multiply(
                 self._solve_for_prime_power(prime, pf.get_exponent(prime))
             ),
