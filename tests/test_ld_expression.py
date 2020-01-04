@@ -1,6 +1,6 @@
 import unittest
 import random
-from rsa.diophantine_expressions.linear_expression import LinearExpression
+from numbers.diophantine_expressions.linear_expression import LinearExpression
 from tests.utils import PRIMES
 
 

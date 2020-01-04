@@ -1,5 +1,5 @@
 """Script to run the server."""
-from rsa.cryptography.app import create_app
+from numbers.cryptography.app import create_app
 
 
 if __name__ == "__main__":

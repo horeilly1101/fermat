@@ -1,5 +1,5 @@
 import unittest
-from rsa.cryptography.rsa_algorithm import RSAAlgorithm
+from numbers.cryptography.rsa_algorithm import RSAAlgorithm
 from tests import utils
 
 

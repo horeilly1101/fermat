@@ -1,6 +1,6 @@
 import unittest
 import random
-from rsa.arithmetic_functions import *
+from numbers.arithmetic_functions import *
 
 
 class TestArithmeticFunction(unittest.TestCase):

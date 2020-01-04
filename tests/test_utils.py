@@ -1,5 +1,5 @@
 import unittest
-import rsa.utils as utils
+import numbers.utils as utils
 from tests.utils import PRIMES
 
 

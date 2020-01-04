@@ -1,8 +1,8 @@
 import unittest
 from functools import reduce
 
-from rsa.diophantine_expressions.sum_of_squares_expression import SumOfSquaresSolution, SumOfSquaresExpression
-from rsa.factorizations.prime_factorization import PrimeFactorization
+from numbers.diophantine_expressions.sum_of_squares_expression import SumOfSquaresSolution, SumOfSquaresExpression
+from numbers.factorizations.prime_factorization import PrimeFactorization
 import tests.utils as utils
 
 

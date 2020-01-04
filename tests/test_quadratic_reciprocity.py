@@ -1,5 +1,5 @@
 import unittest
-from rsa.quadratic_reciprocity import compute_jacobi_symbol
+from numbers.quadratic_reciprocity import compute_jacobi_symbol
 
 
 class TestQuadraticReciprocity(unittest.TestCase):
