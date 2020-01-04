@@ -9,7 +9,8 @@ class TestContinuedFraction(unittest.TestCase):
     def test_solve(self):
         mp.prec = 10000
         frac = ContinuedFraction.make(lambda: e)
-        frac.get_convergent(20)
+        for term in frac.get_terms(100):
+            print(term)
 
     def test_solve_periodic(self):
         frac = PeriodicContinuedFraction.make_for_square_root(27)

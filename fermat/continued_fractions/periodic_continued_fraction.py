@@ -1,7 +1,7 @@
 import math
 from typing import List
+import functools
 
-from fermat import utils
 from fermat.continued_fractions.continued_fraction import ContinuedFraction
 from fermat.continued_fractions.expression import IrrationalFraction, IrrationalSum, SquareRoot
 from fermat.continued_fractions.generators import periodic_cf_representation_generator
@@ -13,7 +13,7 @@ class PeriodicContinuedFraction(ContinuedFraction):
         self.repeat_idx = repeat_idx
         self.period_length = len(representation) - repeat_idx
 
-        factory = utils.GeneratorFactory(
+        factory = functools.partial(
             periodic_cf_representation_generator,
             representation=representation,
             repeat_idx=repeat_idx

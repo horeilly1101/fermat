@@ -1,15 +1,16 @@
+import functools
+from typing import Callable, Iterator
 from fermat.continued_fractions.convergent import Convergent
 from fermat.continued_fractions.expression import Number
 from fermat.continued_fractions.generators import cf_representation_generator
-from fermat import utils
 
 
 class ContinuedFraction:
-    def __init__(self, generator_factory: utils.GeneratorFactory):
-        self.generator_factory = generator_factory
+    def __init__(self, representation_producer: Callable[[], Iterator[int]]):
+        self.representation_producer = representation_producer
 
     def __iter__(self):
-        return self.generator_factory.create()
+        return self.representation_producer()
 
     def get_terms(self, num_terms: int):
         for _, a_i in zip(range(num_terms), self):
@@ -37,7 +38,7 @@ class ContinuedFraction:
 
     @staticmethod
     def make(num_callable):
-        factory = utils.GeneratorFactory(
+        factory = functools.partial(
             cf_representation_generator,
             number=Number(num_callable)
         )
