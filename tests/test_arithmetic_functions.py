@@ -1,6 +1,6 @@
 import unittest
 import random
-from numbers.arithmetic_functions import *
+from fermath.arithmetic_functions import *
 
 
 class TestArithmeticFunction(unittest.TestCase):

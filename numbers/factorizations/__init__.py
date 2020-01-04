@@ -1,2 +1,0 @@
-from numbers.factorizations.prime_factorization import PrimeFactorization
-from numbers.factorizations.factorization import Factorization

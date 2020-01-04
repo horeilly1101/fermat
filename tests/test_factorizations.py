@@ -1,5 +1,5 @@
 import unittest
-from numbers.factorizations.prime_factorization import PrimeFactorization
+from fermath.factorizations.prime_factorization import PrimeFactorization
 
 
 class TestPrimeFactorization(unittest.TestCase):

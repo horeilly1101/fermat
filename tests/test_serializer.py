@@ -1,5 +1,5 @@
 import unittest
-from numbers.cryptography.serializer import AsciiSerializer
+from fermath.cryptography.serializer import AsciiSerializer
 
 
 class TestSerializer(unittest.TestCase):

@@ -1,0 +1,2 @@
+from fermath.factorizations.prime_factorization import PrimeFactorization
+from fermath.factorizations.factorization import Factorization

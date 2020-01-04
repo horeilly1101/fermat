@@ -1,5 +1,5 @@
 import unittest
-import numbers.utils as utils
+import fermath.utils as utils
 from tests.utils import PRIMES
 
 
