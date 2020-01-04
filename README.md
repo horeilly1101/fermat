@@ -2,8 +2,8 @@
 
 > A collection of efficient number theoretic algorithms and data structures
 
-[![Build Status](https://travis-ci.com/horeilly1101/rsa.svg?branch=master)](https://travis-ci.com/horeilly1101/rsa)
-[![codecov](https://codecov.io/gh/horeilly1101/rsa/branch/master/graph/badge.svg)](https://codecov.io/gh/horeilly1101/rsa)
+[![Build Status](https://travis-ci.com/horeilly1101/fermat.svg?branch=master)](https://travis-ci.com/horeilly1101/fermat)
+[![codecov](https://codecov.io/gh/horeilly1101/fermat/branch/master/graph/badge.svg)](https://codecov.io/gh/horeilly1101/fermat)
 
 ## How to run
 
