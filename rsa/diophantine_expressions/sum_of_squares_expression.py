@@ -106,7 +106,7 @@ class SumOfSquaresExpression(DiophantineExpression):
                 v -= multiple
 
             new_multiple = (pow(u, 2) + pow(v, 2)) // multiple
-            new_sum_of_squares = SumOfSquaresSolution(u, v, multiple * new_multiple)
+            new_sum_of_squares = SumOfSquaresSolution(self, u, v)
 
             descent_sum_of_squares = (
                 descent_sum_of_squares
