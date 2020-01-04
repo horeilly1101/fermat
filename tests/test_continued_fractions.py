@@ -1,7 +1,7 @@
 import unittest
 from mpmath import pi, mp, e
-from fermath.continued_fractions import PeriodicContinuedFraction, ContinuedFraction
-from fermath.diophantine_expressions.pell_like_expression import PellLikeExpression
+from fermat.continued_fractions import PeriodicContinuedFraction, ContinuedFraction
+from fermat.diophantine_expressions.pell_like_expression import PellLikeExpression
 from tests import utils
 
 

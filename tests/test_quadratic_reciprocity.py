@@ -1,5 +1,5 @@
 import unittest
-from fermath.quadratic_reciprocity import compute_jacobi_symbol
+from fermat.quadratic_reciprocity import compute_jacobi_symbol
 
 
 class TestQuadraticReciprocity(unittest.TestCase):

@@ -1,6 +1,6 @@
 import unittest
 import random
-from fermath.diophantine_expressions.linear_expression import LinearExpression
+from fermat.diophantine_expressions.linear_expression import LinearExpression
 from tests.utils import PRIMES
 
 

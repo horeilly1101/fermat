@@ -1,5 +1,5 @@
 """Script to run the server."""
-from fermath.cryptography.app import create_app
+from fermat.cryptography.app import create_app
 
 
 if __name__ == "__main__":
