@@ -42,7 +42,7 @@ class TestSumOfSquares(unittest.TestCase):
 
     def test_ppt(self):
         ppt = PPTExpression()
-        for i in range(1000):
-            if ppt.solution_exists(i):
-                # print(i, ppt.solve(i), ppt.solve(i).evaluate())
-                ppt.solve(i)
+        # for i in range(1000):
+        #     if ppt.solution_exists(i):
+        #         print(i, ppt.solve(i), ppt.solve(i).evaluate())
+        #         ppt.solve(i)

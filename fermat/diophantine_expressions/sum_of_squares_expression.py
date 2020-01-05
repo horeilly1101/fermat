@@ -119,7 +119,7 @@ class SumOfSquaresExpression(DiophantineExpression):
         return descent_sum_of_squares
 
     def _solve_for_prime_power(self, prime, exponent):
-        if exponent % 2 == 0:
+        if exponent % 2 == 0 and prime % 4 != 1:
             return SumOfSquaresSolution(
                 self,
                 pow(prime, exponent // 2),
