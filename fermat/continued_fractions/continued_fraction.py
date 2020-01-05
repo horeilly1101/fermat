@@ -38,9 +38,9 @@ class ContinuedFraction:
 
     @staticmethod
     def make(num_callable):
-        factory = functools.partial(
+        producer = functools.partial(
             cf_representation_generator,
             number=Number(num_callable)
         )
 
-        return ContinuedFraction(factory)
+        return ContinuedFraction(producer)

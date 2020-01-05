@@ -1,4 +1,5 @@
 import math
+import itertools
 from typing import List, Iterator
 
 from fermat.continued_fractions.expression import Number, IrrationalFraction, IrrationalSum
@@ -32,21 +33,13 @@ def cf_representation_generator(number: Number) -> Iterator[int]:
         except ZeroDivisionError:
             break
 
-    # after termination, just return 0
-    while True:
-        yield 0
 
+def periodic_cf_representation_generator(representation: List[int], repeat_idx: int) -> Iterator[int]:
+    for i, elem in enumerate(representation):
+        if i >= repeat_idx:
+            break
 
-def periodic_cf_representation_generator(
-    representation: List[int],
-    repeat_idx: int
-) -> Iterator[int]:
+        yield elem
 
-    current_idx = 0
-
-    while True:
-        yield representation[current_idx]
-
-        current_idx += 1
-        if current_idx >= len(representation):
-            current_idx = repeat_idx
+    for elem in itertools.cycle(representation[repeat_idx:]):
+        yield elem

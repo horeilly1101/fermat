@@ -13,12 +13,12 @@ class PeriodicContinuedFraction(ContinuedFraction):
         self.repeat_idx = repeat_idx
         self.period_length = len(representation) - repeat_idx
 
-        factory = functools.partial(
+        producer = functools.partial(
             periodic_cf_representation_generator,
             representation=representation,
             repeat_idx=repeat_idx
         )
-        super().__init__(factory)
+        super().__init__(producer)
 
     @staticmethod
     def make_for_square_root(square: int) -> "PeriodicContinuedFraction":

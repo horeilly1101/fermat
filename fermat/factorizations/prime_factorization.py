@@ -1,6 +1,8 @@
 import collections
 import functools
 import math
+from typing import List
+
 from fermat.factorizations.factorization import Factorization
 
 
@@ -34,18 +36,21 @@ class PrimeFactorization(Factorization):
             1
         )
 
+    def get_divisors(self):
+        pass
+
     def get_exponent(self, prime):
         if prime in self.prime_factors:
             return self.prime_factors[prime]
 
         return 0
 
-    def get_distinct_prime_factors(self):
+    def get_distinct_prime_factors(self) -> List[int]:
         return list(self.prime_factors.keys())
 
     @staticmethod
     @functools.lru_cache()
-    def factor(num) -> "PrimeFactorization":
+    def factor(num: int) -> "PrimeFactorization":
         # ------------------------
         # Algorithm: out-of-the-box sieve of Eratosthenes
         # ------------------------
