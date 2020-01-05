@@ -8,24 +8,24 @@
 ## Description
 
 Fermat contains algorithms and data structures to efficiently
-compute many import results in number theory. Most methods are
-based off of `MATH 365` at Rice University and **A Friendly
-Introduction to Number Theory** by Joseph H. Silverman.
+compute many important results in number theory. Most methods are
+based off of `MATH 365` at Rice University and *A Friendly
+Introduction to Number Theory* by Joseph H. Silverman.
 
 ### This library includes:
 
-- arithmetic functions and the dirichlet convolution
-- continued fractions
-- cryptographic operations and the RSA algorithm
-- efficient algorithms to solve common diophantine equations
+- Arithmetic functions and the dirichlet convolution
+- Continued fractions
+- Cryptographic operations and the RSA algorithm
+- Efficient algorithms to solve common diophantine equations
     - Linear, Sum of Squares, Pell-like, etc.
-- common factorization strategies
-- primality testing (Rabin-Miller)
-- operations with quadratic reciprocity and the Jacobi symbol
-- random (large) prime generation
-- an algorithm to compute modular inverses
-- various utility methods
-- and more to come ...
+- Common factorization strategies
+- Primality testing (Rabin-Miller)
+- Operations with quadratic reciprocity and the Jacobi symbol
+- Random (large) prime generation
+- An algorithm to compute modular inverses
+- Various utility methods
+- And more to come ...
 
 ## How to use
 
@@ -49,7 +49,7 @@ python3 run_server.py
 ```
 
 The server will then be available at `localhost:2345`. The only
-available endpoint is `/get-keys/<min_bits>`, where `min_bits`
+available `GET` endpoint is `/get-keys/<min_bits>`, where `min_bits`
 is an integer that specifies the minimum allowable bits in the
 public key. The public key and modulus will have about twice
 as many bits.
@@ -57,7 +57,10 @@ as many bits.
 ### Example Response
 
     {
-        
+        min_bits: 10,
+        publicKey: "0x3d981",
+        privateKey: "0x568bcc181",
+        modulus: "0xdab06fce1"
     }
 
 ## How to test
