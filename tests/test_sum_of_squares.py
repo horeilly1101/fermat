@@ -2,6 +2,7 @@ import unittest
 from functools import reduce
 
 from fermat.diophantine_expressions.sum_of_squares_expression import SumOfSquaresSolution, SumOfSquaresExpression
+from fermat.diophantine_expressions.ppt_expression import PPTExpression
 from fermat.factorizations.prime_factorization import PrimeFactorization
 import tests.utils as utils
 
@@ -38,3 +39,10 @@ class TestSumOfSquares(unittest.TestCase):
             sos.evaluate(),
             multiple
         )
+
+    def test_ppt(self):
+        ppt = PPTExpression()
+        for i in range(1000):
+            if ppt.solution_exists(i):
+                # print(i, ppt.solve(i), ppt.solve(i).evaluate())
+                ppt.solve(i)
