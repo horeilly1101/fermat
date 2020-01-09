@@ -17,5 +17,5 @@ class TestSequence(unittest.TestCase):
 
     def test_prime(self):
         seq = PrimeSequence()
-        for elem in seq.get_terms(100000):
+        for elem in seq.get_terms(10):
             print(elem)

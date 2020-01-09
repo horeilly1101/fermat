@@ -5,17 +5,6 @@ from fermat.primality_testing import is_prime
 import random
 
 
-# def create_sieve(limit):
-#     nums: list = [i for i in range(2, limit)]
-#     for num in nums:
-#         if num is None:
-#             continue
-#
-#         for i in range(2, limit // num):
-#             nums[num * i - 2] = None
-#     return [i for i in nums if i is not None]
-
-
 class RandomPrimeGenerator:
     """
     Class that randomly generates prime numbers.

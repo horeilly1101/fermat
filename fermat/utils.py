@@ -1,7 +1,7 @@
 """
 File that contains various utility functions.
 """
-from typing import List
+from typing import List, Iterator
 from fermat.diophantine_expressions.linear_expression import LinearExpression
 
 
@@ -55,7 +55,7 @@ def get_divisors(num: int) -> List[int]:
     ]
 
 
-def get_divisors_generator(num: int) -> List[int]:
+def get_divisors_generator(num: int) -> Iterator[int]:
     for divisor_candidate in range(1, num + 1):
         if num % divisor_candidate == 0:
             yield divisor_candidate

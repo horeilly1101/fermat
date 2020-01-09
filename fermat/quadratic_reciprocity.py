@@ -9,32 +9,30 @@ def get_quadratic_non_residue(number: int) -> int:
     :return: a quadratic non residue mod number
     """
     for i in range(2, number):
-        if compute_jacobi_symbol(i, number) == -1:
+        if not is_quadratic_residue(i, number):
             return i
 
     raise ValueError(f"No quadratic non residues of {number} found!")
 
 
-def is_quadratic_residue(x, modulus) -> bool:
+def is_quadratic_residue(x: int, modulus: int) -> bool:
     if is_prime(modulus):
-        return compute_jacobi_symbol(x, modulus)
+        return compute_jacobi_symbol(x, modulus) == 1
 
     pf = PrimeFactorization.factor(modulus)
     return all(
-        compute_jacobi_symbol(x, prime)
+        compute_jacobi_symbol(x, prime) == 1
         for prime in pf.get_distinct_prime_factors()
     )
 
 
-def compute_jacobi_symbol(x, modulus):
+def compute_jacobi_symbol(x: int, modulus: int) -> int:
     if x == 0:
         return 0
 
     # ensure x is a residue mod the modulus
     if not 0 < x < modulus:
-        return compute_jacobi_symbol(
-            x % modulus, modulus
-        )
+        return compute_jacobi_symbol(x % modulus, modulus)
 
     # trivial case
     if x == 1:

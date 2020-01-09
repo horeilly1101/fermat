@@ -20,7 +20,10 @@ class PrimeFactorization(Factorization):
         return hash(self.prime_factors)
 
     def __str__(self):
-        return f"PrimeFactorization({self.prime_factors})"
+        return " * ".join(
+            f"{prime}^{exponent}"
+            for prime, exponent in self.prime_factors.items()
+        )
 
     def __repr__(self):
         return str(self)
