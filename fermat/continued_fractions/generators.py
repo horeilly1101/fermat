@@ -41,5 +41,4 @@ def periodic_cf_representation_generator(representation: List[int], repeat_idx: 
 
         yield elem
 
-    for elem in itertools.cycle(representation[repeat_idx:]):
-        yield elem
+    yield from itertools.cycle(representation[repeat_idx:])

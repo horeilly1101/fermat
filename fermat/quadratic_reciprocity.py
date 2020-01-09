@@ -19,7 +19,11 @@ def is_quadratic_residue(x, modulus) -> bool:
     if is_prime(modulus):
         return compute_jacobi_symbol(x, modulus)
 
-    raise ValueError()
+    pf = PrimeFactorization.factor(modulus)
+    return all(
+        compute_jacobi_symbol(x, prime)
+        for prime in pf.get_distinct_prime_factors()
+    )
 
 
 def compute_jacobi_symbol(x, modulus):
