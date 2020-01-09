@@ -26,3 +26,8 @@ class TestPrimeFactorization(unittest.TestCase):
             1,
             PrimeFactorization.of().compute_product()
         )
+
+    def test_factors(self):
+        pf = PrimeFactorization.factor(360)
+        for div in pf.get_divisors():
+            print(div)

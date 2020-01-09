@@ -1,7 +1,8 @@
 """
 File that contains various utility functions.
 """
-from typing import List, Iterator
+import functools
+from typing import List, Iterator, Iterable
 from fermat.diophantine_expressions.linear_expression import LinearExpression
 
 
@@ -46,6 +47,14 @@ def lcm(a: int, b: int) -> int:
     # it's not hard to prove that:
     #   lcm(a, b) * gcd(a, b) = a * b
     return a * b // gcd(a, b)
+
+
+def multiply(factors: Iterable[int]) -> int:
+    return functools.reduce(
+        lambda result, num: result * num,
+        factors,
+        1
+    )
 
 
 def get_divisors(num: int) -> List[int]:

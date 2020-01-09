@@ -27,4 +27,11 @@ class ArithmeticFunction(ABC):
                     for divisor in utils.get_divisors(num)
                 ])
 
+            def evaluate_from_prime_factorization(self, pf: PrimeFactorization):
+                num = pf.compute_product()
+                return sum([
+                    original_function.evaluate(divisor) * af.evaluate(num // divisor)
+                    for divisor in pf.get_divisors()
+                ])
+
         return DirichletProductFunction()

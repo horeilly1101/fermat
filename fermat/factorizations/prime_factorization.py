@@ -2,8 +2,10 @@ import collections
 import functools
 import math
 from typing import List
+import itertools
 
 from fermat.factorizations.factorization import Factorization
+from fermat import utils
 
 
 class PrimeFactorization(Factorization):
@@ -40,7 +42,17 @@ class PrimeFactorization(Factorization):
         )
 
     def get_divisors(self):
-        pass
+        primes = self.get_distinct_prime_factors()
+        exponent_combinations = itertools.product(*[
+            range(self.get_exponent(prime) + 1)
+            for prime in primes
+        ])
+
+        for exponents in exponent_combinations:
+            yield utils.multiply(
+                pow(prime, exponent)
+                for prime, exponent in zip(primes, exponents)
+            )
 
     def get_exponent(self, prime):
         if prime in self.prime_factors:
