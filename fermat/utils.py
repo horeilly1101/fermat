@@ -49,7 +49,7 @@ def lcm(a: int, b: int) -> int:
     return a * b // gcd(a, b)
 
 
-def multiply(factors: Iterable[int]) -> int:
+def product(factors: Iterable[int]) -> int:
     return functools.reduce(
         lambda result, num: result * num,
         factors,

@@ -27,6 +27,13 @@ class SumOfSquaresSolution(DiophantineSolution):
             self.y * other.x - self.x * other.y
         )
 
+    def multiply2(self, other: "SumOfSquaresSolution") -> "SumOfSquaresSolution":
+        return SumOfSquaresSolution(
+            self.expression,
+            self.y * other.x + self.x * other.y,
+            self.x * other.x - self.y * other.y
+        )
+
     def raise_to_power(self, power: int) -> "SumOfSquaresSolution":
         return functools.reduce(
             lambda result, _: result.multiply(self),
@@ -84,7 +91,7 @@ class SumOfSquaresExpression(DiophantineExpression):
         # find integers z, multiple such that
         #   z^2 + 1 = multiple * prime.
         # Justification can be found here:
-        #   https://math.stackexchange.com/questions/5877/efficiently-finding-two-squares-which-sum-to-a-prime
+        #   https://math.stackexchange.com/questions/5877
         non_residue = get_quadratic_non_residue(prime)
         z = pow(non_residue, (prime - 1) // 4, prime)
         multiple = (pow(z, 2) + 1) // prime

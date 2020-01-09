@@ -42,7 +42,7 @@ All code is available in the `/fermat` directory.
 ## RSA Encryption API
 
 This project also contains a REST API that generates arbitrarily
-public/private keys for RSA encryption. You can run the server
+large public/private keys for RSA encryption. You can run the server
 with
 ```
 python3 run_server.py
@@ -51,7 +51,7 @@ python3 run_server.py
 The server will then be available at `localhost:2345`. The only
 available `GET` endpoint is `/get-keys/<min_bits>`, where `min_bits`
 is an integer that specifies the minimum allowable bits in the
-public key. The public key and modulus will have about twice
+public key. The private key and modulus will have about twice
 as many bits.
 
 ### Example Response

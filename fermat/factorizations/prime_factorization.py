@@ -35,10 +35,9 @@ class PrimeFactorization(Factorization):
         :return: the positive integer represented by the prime
             factorization.
         """
-        return functools.reduce(
-            lambda result, num: result * pow(num, self.get_exponent(num)),
-            self.prime_factors,
-            1
+        return utils.product(
+            pow(num, self.get_exponent(num))
+            for num in self.get_distinct_prime_factors()
         )
 
     def get_divisors(self):
@@ -49,7 +48,7 @@ class PrimeFactorization(Factorization):
         ])
 
         for exponents in exponent_combinations:
-            yield utils.multiply(
+            yield utils.product(
                 pow(prime, exponent)
                 for prime, exponent in zip(primes, exponents)
             )

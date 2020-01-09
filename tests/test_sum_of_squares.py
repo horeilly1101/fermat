@@ -40,6 +40,36 @@ class TestSumOfSquares(unittest.TestCase):
             multiple
         )
 
+    def test_multiply(self):
+        sol = SumOfSquaresSolution(self.sos, 2, 1)
+
+        # 5^2
+        # sold52_1 = SumOfSquaresSolution(self.sos, 5, 0)
+        sol52_2 = SumOfSquaresSolution(self.sos, 3, 4)
+
+        # 5^3
+        sol53_1 = SumOfSquaresSolution(self.sos, 11, 2)
+        sol53_2 = SumOfSquaresSolution(self.sos, 10, 5)
+
+        # 5^4
+        sol54_1 = SumOfSquaresSolution(self.sos, 15, 20)
+        sol54_2 = SumOfSquaresSolution(self.sos, 24, 7)
+        # sol54_3 = SumOfSquaresSolution(self.sos, 25, 0)
+
+        # 5^5
+        sol55_1 = SumOfSquaresSolution(self.sos, 55, 10)  # 54_2
+        sol55_2 = SumOfSquaresSolution(self.sos, 50, 25)  # 54_3
+        sol55_3 = SumOfSquaresSolution(self.sos, 38, 41)  # 54_2
+
+        # 5^6
+        sol56_1 = SumOfSquaresSolution(self.sos, 117, 44)
+        sol56_2 = SumOfSquaresSolution(self.sos, 120, 35)
+        # sol56_3 = SumOfSquaresSolution(self.sos, 125, 0)
+        sol56_4 = SumOfSquaresSolution(self.sos, 100, 75)
+
+        print(sol.multiply2(sol53_1))
+        print(sol.multiply2(sol53_2))
+
     def test_ppt(self):
         ppt = PPTExpression()
         # for i in range(1000):
