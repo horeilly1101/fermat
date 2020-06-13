@@ -1,7 +1,8 @@
-from typing import NamedTuple
+from dataclasses import dataclass
 
 
-class Convergent(NamedTuple):
+@dataclass
+class Convergent:
     p: int
     q: int
 
